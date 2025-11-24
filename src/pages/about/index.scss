@@ -1,0 +1,141 @@
+.about-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 0;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+  
+  .title {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333333;
+  }
+}
+
+.content {
+  padding: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  .card-title {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #007bff;
+  }
+}
+
+.info-list {
+  .info-item {
+    display: flex;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f3f4;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .info-label {
+      font-weight: 600;
+      color: #495057;
+      min-width: 5rem;
+    }
+    
+    .info-value {
+      color: #007bff;
+      flex: 1;
+    }
+  }
+}
+
+.tech-stack {
+  .tech-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f3f4;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .tech-name {
+      font-weight: 600;
+      color: #495057;
+      min-width: 6rem;
+      background-color: #e3f2fd;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+    
+    .tech-desc {
+      color: #6c757d;
+      margin-left: 1rem;
+      flex: 1;
+    }
+  }
+}
+
+.platform-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  
+  .platform-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    
+    .platform-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .platform-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #495057;
+      text-align: center;
+    }
+  }
+}
+
+.features-list {
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    
+    .feature-bullet {
+      color: #007bff;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      min-width: 1rem;
+    }
+    
+    .feature-text {
+      color: #495057;
+      line-height: 1.5;
+    }
+  }
+}

@@ -1,0 +1,548 @@
+/* 页面整体 */
+.profile-page {
+  min-height: 100vh;
+  background-color: #111827;
+  color: #ffffff;
+  padding-bottom: 200rpx;
+}
+
+/* Header */
+.profile-header {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  padding: 64rpx 32rpx;
+}
+
+.header-content {
+  text-align: center;
+}
+
+/* 头像 */
+.avatar-wrapper {
+  width: 160rpx;
+  height: 160rpx;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32rpx;
+}
+
+.avatar-icon {
+  font-size: 80rpx;
+}
+
+.username {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.uid {
+  display: block;
+  font-size: 28rpx;
+  color: #9ca3af;
+  margin-bottom: 32rpx;
+}
+
+/* 用户统计 */
+.user-stats {
+  display: flex;
+  justify-content: center;
+  gap: 64rpx;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 160rpx;
+}
+
+.stat-value-orange {
+  display: block;
+  color: #fb923c;
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.stat-value-green {
+  display: block;
+  color: #4ade80;
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+/* 内容区 */
+.content-section {
+  padding: 48rpx 32rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.section-icon {
+  font-size: 40rpx;
+}
+
+.section-title,
+.section-title-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+/* 统计卡片 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32rpx;
+  margin-bottom: 48rpx;
+}
+
+.stat-card {
+  background-color: #1f2937;
+  border-radius: 16rpx;
+  padding: 32rpx;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.stat-icon {
+  font-size: 40rpx;
+
+  &.green {
+    color: #4ade80;
+  }
+
+  &.blue {
+    color: #60a5fa;
+  }
+}
+
+.stat-change {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+.stat-value {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.stat-title {
+  display: block;
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+/* Chart */
+.chart-card {
+  background-color: #1f2937;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 48rpx;
+}
+
+.chart-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #d1d5db;
+  margin-bottom: 24rpx;
+}
+
+.chart-container {
+  height: 256rpx;
+  position: relative;
+  margin-bottom: 16rpx;
+}
+
+.chart-bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  padding: 0 16rpx;
+}
+
+.chart-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 48rpx;
+  background: linear-gradient(180deg, #fb923c 0%, #f97316 100%);
+  border-radius: 8rpx 8rpx 0 0;
+  min-height: 20rpx;
+  transition: height 0.3s ease;
+}
+
+.chart-label {
+  display: block;
+  font-size: 20rpx;
+  color: #9ca3af;
+  margin-top: 8rpx;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 32rpx;
+  margin-top: 16rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+
+  &.orange {
+    background-color: #fb923c;
+  }
+}
+
+.legend-dash {
+  width: 32rpx;
+  height: 4rpx;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #6b7280 0,
+    #6b7280 8rpx,
+    transparent 8rpx,
+    transparent 16rpx
+  );
+}
+
+.legend-text {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+/* 分块 */
+.section-block {
+  margin-bottom: 48rpx;
+}
+
+/* 设置列表 */
+.setting-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.setting-item {
+  background-color: #1f2937;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.clickable {
+    &:active {
+      background-color: #374151;
+    }
+  }
+}
+
+.setting-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  flex: 1;
+}
+
+.setting-icon {
+  font-size: 40rpx;
+  color: #9ca3af;
+}
+
+.setting-icon-box {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.blue {
+    background-color: #2563eb;
+  }
+
+  &.green {
+    background-color: #16a34a;
+  }
+}
+
+.setting-icon-text {
+  font-size: 40rpx;
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.setting-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.setting-desc {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+.arrow {
+  font-size: 40rpx;
+  color: #9ca3af;
+}
+
+/* 按钮组 */
+.btn-bound,
+.btn-bind,
+.btn-manage {
+  padding: 8rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.btn-bound {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+.btn-bind {
+  background-color: #f97316;
+  color: #ffffff;
+}
+
+.btn-manage {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+/* Picker */
+.picker-view {
+  padding: 8rpx 24rpx;
+  background-color: #374151;
+  border-radius: 8rpx;
+}
+
+.picker-text {
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+/* 退出登录 */
+.logout-btn {
+  width: 100%;
+  background-color: #dc2626;
+  color: #ffffff;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  font-weight: 500;
+  border: none;
+
+  &:active {
+    background-color: #b91c1c;
+  }
+}
+
+.logout-text {
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #1f2937;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 48rpx;
+  width: 100%;
+  max-width: 960rpx;
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48rpx;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.modal-close {
+  font-size: 64rpx;
+  color: #9ca3af;
+  line-height: 1;
+
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+.modal-intro {
+  text-align: center;
+}
+
+.modal-icon-box {
+  width: 128rpx;
+  height: 128rpx;
+  background-color: #2563eb;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32rpx;
+}
+
+.modal-icon {
+  font-size: 64rpx;
+}
+
+.modal-desc {
+  font-size: 28rpx;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+.modal-benefits {
+  background-color: #374151;
+  border-radius: 16rpx;
+  padding: 32rpx;
+}
+
+.benefits-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.benefit-dot {
+  width: 8rpx;
+  height: 8rpx;
+  background-color: #60a5fa;
+  border-radius: 50%;
+}
+
+.benefit-text {
+  font-size: 28rpx;
+  color: #d1d5db;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  font-weight: 500;
+  border: none;
+  font-size: 32rpx;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+
+  &:active {
+    background-color: #1d4ed8;
+  }
+}
+
+.btn-secondary {
+  background-color: #374151;
+  color: #ffffff;
+
+  &:active {
+    background-color: #4b5563;
+  }
+}

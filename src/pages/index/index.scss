@@ -1,0 +1,139 @@
+.index-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem 1rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  
+  .title {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    display: block;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.content {
+  padding: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  
+  .card-title {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 1rem;
+  }
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  
+  .counter-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #007bff;
+    min-width: 3rem;
+    text-align: center;
+  }
+  
+  .btn-minus,
+  .btn-plus {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &[disabled] {
+      background-color: #cccccc;
+      color: #999999;
+    }
+  }
+}
+
+.feature-list {
+  .feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+      margin-right: 1rem;
+      width: 3rem;
+      text-align: center;
+    }
+    
+    .feature-text {
+      flex: 1;
+      
+      .feature-title {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 0.25rem;
+      }
+      
+      .feature-desc {
+        display: block;
+        font-size: 0.875rem;
+        color: #666666;
+      }
+    }
+  }
+}
+
+.guide-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  .guide-link {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #495057;
+    text-align: left;
+    
+    &:hover {
+      background-color: #e9ecef;
+      border-color: #adb5bd;
+    }
+  }
+}

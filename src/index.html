@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Taro Project</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= publicPath %>favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= publicPath %>favicon-16x16.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #f8f9fa;
+    }
+    
+    #app {
+      min-height: 100vh;
+    }
+    
+    /* 加载动画 */
+    .loading-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      margin-top: 16px;
+      color: #6c757d;
+      font-size: 14px;
+    }
+    
+    /* 错误页面 */
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .error-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    
+    .error-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    
+    .error-message {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    
+    .error-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .error-button:hover {
+      background-color: #0056b3;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .error-title {
+        font-size: 20px;
+      }
+      
+      .error-message {
+        font-size: 14px;
+      }
+      
+      .error-button {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="loading-container">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 页面加载完成后的处理
+    window.addEventListener('load', function() {
+      // 隐藏加载动画，显示内容
+      const loadingContainer = document.querySelector('.loading-container');
+      if (loadingContainer) {
+        setTimeout(() => {
+          loadingContainer.style.display = 'none';
+        }, 500);
+      }
+    });
+    
+    // 全局错误处理
+    window.addEventListener('error', function(e) {
+      console.error('全局错误:', e.error);
+      showError('页面出现错误，请刷新重试');
+    });
+    
+    // Promise 错误处理
+    window.addEventListener('unhandledrejection', function(e) {
+      console.error('未处理的 Promise 错误:', e.reason);
+      showError('网络请求失败，请检查网络连接');
+    });
+    
+    // 显示错误信息
+    function showError(message) {
+      const app = document.getElementById('app');
+      if (app) {
+        app.innerHTML = `
+          <div class="error-container">
+            <div class="error-icon">😞</div>
+            <h1 class="error-title">出错了</h1>
+            <p class="error-message">${message}</p>
+            <button class="error-button" onclick="window.location.reload()">重新加载</button>
+          </div>
+        `;
+      }
+    }
+    
+    // 网络状态检测
+    if ('navigator' in window && 'onLine' in navigator) {
+      function updateOnlineStatus() {
+        if (!navigator.onLine) {
+          showError('网络连接已断开，请检查网络设置');
+        }
+      }
+      
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+    }
+  </script>
+</body>
+</html>

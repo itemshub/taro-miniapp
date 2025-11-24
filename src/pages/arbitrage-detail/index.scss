@@ -1,0 +1,476 @@
+.arbitrage-detail-page {
+  min-height: 100vh;
+  background-color: #111827;
+  position: relative;
+
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+
+    .error-text {
+      color: #9CA3AF;
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .error-button {
+      background-color: #F97316;
+      color: white;
+      padding: 24px 32px;
+      border-radius: 16px;
+    }
+  }
+
+  .content {
+    height: 100vh;
+    padding-bottom: 160px;
+  }
+
+  .skin-info-card {
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px;
+    display: flex;
+    align-items: center;
+
+    .skin-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 16px;
+      margin-right: 32px;
+    }
+
+    .skin-details {
+      flex: 1;
+
+      .skin-name {
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .skin-type {
+        font-size: 32px;
+        color: #9CA3AF;
+        display: block;
+        margin-bottom: 16px;
+      }
+
+      .skin-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .risk-badge {
+          padding: 8px 16px;
+          border-radius: 8px;
+
+          &.low {
+            background-color: rgba(16, 185, 129, 0.1);
+          }
+
+          &.medium {
+            background-color: rgba(251, 191, 36, 0.1);
+          }
+
+          &.high {
+            background-color: rgba(239, 68, 68, 0.1);
+          }
+
+          .risk-text {
+            font-size: 24px;
+
+            &.low {
+              color: #34D399;
+            }
+
+            &.medium {
+              color: #FBBF24;
+            }
+
+            &.high {
+              color: #EF4444;
+            }
+          }
+        }
+
+        .volume-text {
+          font-size: 24px;
+          color: #6B7280;
+        }
+      }
+    }
+  }
+
+  .section {
+    margin: 24px;
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: white;
+      display: block;
+      margin-bottom: 32px;
+    }
+  }
+
+  .price-comparison-card {
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .market-side {
+      flex: 1;
+      text-align: center;
+
+      .side-label {
+        font-size: 28px;
+        color: #9CA3AF;
+        display: block;
+        margin-bottom: 16px;
+      }
+
+      .market-card {
+        border-radius: 12px;
+        padding: 32px;
+
+        .platform-name {
+          font-size: 36px;
+          font-weight: bold;
+          color: white;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .platform-fee {
+          font-size: 28px;
+          display: block;
+          margin-bottom: 16px;
+        }
+
+        .platform-price {
+          font-size: 48px;
+          font-weight: bold;
+          color: white;
+          display: block;
+        }
+      }
+
+      &.buy .market-card {
+        background-color: #2563EB;
+
+        .platform-fee {
+          color: #BFDBFE;
+        }
+      }
+
+      &.sell .market-card {
+        background-color: #10B981;
+
+        .platform-fee {
+          color: #A7F3D0;
+        }
+      }
+    }
+
+    .arrow-container {
+      padding: 0 48px;
+
+      .arrow-icon {
+        font-size: 64px;
+        color: #FB923C;
+        display: block;
+      }
+    }
+  }
+
+  .profit-summary {
+    display: flex;
+    justify-content: space-around;
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+
+    .profit-item {
+      text-align: center;
+
+      .profit-label {
+        font-size: 28px;
+        color: #9CA3AF;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .profit-value {
+        font-size: 40px;
+        font-weight: bold;
+        display: block;
+
+        &.orange {
+          color: #FB923C;
+        }
+
+        &.green {
+          color: #34D399;
+        }
+
+        &.blue {
+          color: #60A5FA;
+        }
+      }
+    }
+  }
+
+  .link-buttons {
+    display: flex;
+    gap: 32px;
+
+    .link-button {
+      flex: 1;
+      padding: 32px;
+      border-radius: 16px;
+      font-size: 32px;
+      font-weight: 500;
+      color: white;
+
+      &.buy {
+        background-color: #2563EB;
+      }
+
+      &.sell {
+        background-color: #10B981;
+      }
+    }
+  }
+
+  .risk-card {
+    border-radius: 16px;
+    padding: 32px;
+
+    &.low {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.2);
+
+      .risk-title {
+        color: #34D399;
+      }
+    }
+
+    &.medium {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border: 2px solid rgba(251, 191, 36, 0.2);
+
+      .risk-title {
+        color: #FBBF24;
+      }
+    }
+
+    &.high {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+      border: 2px solid rgba(239, 68, 68, 0.2);
+
+      .risk-title {
+        color: #EF4444;
+      }
+    }
+
+    .risk-title {
+      font-size: 32px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .risk-details {
+      .risk-item {
+        font-size: 28px;
+        color: #D1D5DB;
+        line-height: 1.6;
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .last-updated {
+    text-align: center;
+    padding: 32px;
+
+    .update-text {
+      font-size: 28px;
+      color: #6B7280;
+    }
+  }
+
+  .calculator-fab {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+
+    .fab-button {
+      width: 120px;
+      height: 120px;
+      background-color: #F97316;
+      color: white;
+      border-radius: 50%;
+      font-size: 28px;
+      font-weight: bold;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
+
+    .modal-content {
+      background-color: #1F2937;
+      border-radius: 32px 32px 0 0;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px;
+        border-bottom: 2px solid #374151;
+
+        .modal-title {
+          font-size: 36px;
+          font-weight: bold;
+          color: white;
+        }
+
+        .modal-close {
+          font-size: 48px;
+          color: #9CA3AF;
+          background: transparent;
+          padding: 0;
+          width: 48px;
+          height: 48px;
+          line-height: 48px;
+          text-align: center;
+        }
+      }
+
+      .modal-body {
+        padding: 32px;
+
+        .quantity-input {
+          margin-bottom: 32px;
+
+          .input-label {
+            font-size: 28px;
+            color: #9CA3AF;
+            display: block;
+            margin-bottom: 16px;
+          }
+
+          .input-row {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+
+            .qty-button {
+              width: 80px;
+              height: 80px;
+              background-color: #374151;
+              color: white;
+              border-radius: 12px;
+              font-size: 40px;
+            }
+
+            .qty-input {
+              flex: 1;
+              background-color: #374151;
+              color: white;
+              padding: 24px;
+              border-radius: 12px;
+              text-align: center;
+              font-size: 36px;
+              font-weight: bold;
+            }
+          }
+        }
+
+        .calc-section {
+          background-color: #374151;
+          border-radius: 16px;
+          padding: 32px;
+          margin-bottom: 24px;
+
+          &.profit {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+          }
+
+          .calc-title {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+            display: block;
+            margin-bottom: 24px;
+
+            &.profit-title {
+              color: #34D399;
+            }
+          }
+
+          .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #4B5563;
+
+            &:last-child {
+              border-bottom: none;
+            }
+
+            &.total {
+              font-weight: bold;
+              padding-top: 24px;
+              border-top: 2px solid #4B5563;
+            }
+
+            .calc-label {
+              font-size: 28px;
+              color: #9CA3AF;
+            }
+
+            .calc-value {
+              font-size: 28px;
+              color: white;
+
+              &.profit-value {
+                color: #34D399;
+                font-size: 36px;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

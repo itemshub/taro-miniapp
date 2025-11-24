@@ -1,0 +1,246 @@
+/* 整页背景：使用更柔和的移动端渐变，并保证在小屏幕下不产生断层 */
+.staking-page {
+  min-height: 100vh;
+  background: linear-gradient(130deg, #fd5575 0%, #445ff9 100%);
+  padding-bottom: 16px; // 增加底部空间，适配刘海屏 & 导航栏
+}
+
+/* 顶部导航区：增加移动端内边距、字体缩放、模糊层保持 */
+.page-header {
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 1.75rem 1rem 1.25rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+
+  .page-title {
+    display: block;
+    font-size: 1.5rem;   // 移动端更易读
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+}
+
+/* 顶部统计卡：移动端改为单列或保持两列但缩小 gap */
+.summary-cards {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+
+  .summary-card {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+
+    .summary-label {
+      display: block;
+      font-size: 0.8rem;
+      color: #6a6a6a;
+      margin-bottom: 0.35rem;
+    }
+
+    .summary-value {
+      display: block;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #333;
+
+      &.highlight {
+        color: #4ec41a;
+      }
+    }
+  }
+}
+
+/* 列表区：移动端需要更高的滚动区域 */
+.positions-list {
+  height: calc(100vh - 300px);
+  padding: 0 1rem 1rem;
+  overflow-y: auto;
+}
+
+/* 加载与空状态：统一移动端视觉比例 */
+.loading,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+
+  .loading-text,
+  .empty-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.8rem;
+  }
+
+  .btn-stake {
+    background-color: #fff;
+    color: #007aff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+/* “我的仓位”标题区：按钮区域增加触控尺寸 */
+.staking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+
+  .header-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .btn-add {
+    background-color: rgba(255, 255, 255, 0.22);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* 每条仓位卡片：移动端轻量阴影、圆角更圆润 */
+.position-item {
+  background-color: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* 卡片头部区域：保持原布局但字体缩放 */
+.position-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9rem;
+
+  .symbol-info {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+
+    .symbol {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #343434;
+    }
+
+    .status-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+
+      .status-text {
+        font-size: 0.6rem;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .apy {
+    .apy-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4ec41a;
+    }
+  }
+}
+
+/* 仓位统计区：移动端更紧凑 */
+.position-stats {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0.65rem;
+    background-color: #f7f7f8;
+    border-radius: 8px;
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #333;
+
+      &.earned {
+        color: #4ec41a;
+      }
+    }
+  }
+}
+
+/* 底部区：操作按钮增大触控面积 */
+.position-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .unlock-info {
+    .unlock-label {
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 0.2rem;
+    }
+
+    .unlock-date {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  .position-actions {
+    display: flex;
+    gap: 0.45rem;
+
+    .btn-harvest,
+    .btn-unstake {
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      border: none;
+
+      &.btn-harvest {
+        background-color: #4ec41a;
+        color: #fff;
+      }
+
+      &.btn-unstake {
+        background-color: #f1f1f1;
+        color: #666;
+      }
+    }
+  }
+}

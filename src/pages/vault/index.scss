@@ -1,0 +1,751 @@
+@import '../../styles/variables.scss';
+
+/* ===========================================================
+   Vault Page · APP 化移动端适配（仅移动端）
+   - 字号整体放大
+   - 模块间距加大
+   - 卡片更克制、留白更足
+=========================================================== */
+
+/* 全局动效工具类，可直接挂在组件上 */
+.fade-in {
+  animation: fadeIn 0.45s ease-out;
+}
+
+.slide-up-sm {
+  animation: slideUpSm 0.38s ease-out;
+}
+
+.scale-tap:active {
+  transform: scale(0.97);
+  transition: transform 0.16s ease-out;
+}
+
+/* ===========================================================
+   页面根节点 · 适配刘海屏 & 移动端滚动
+=========================================================== */
+.vault-page {
+  min-height: 100vh;
+  background-color: $gray-900;
+  color: white;
+  padding-bottom: calc($spacing-16 + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================================================
+   Header 区域 · 沉浸式顶部栏
+=========================================================== */
+.vault-header {
+  padding: calc($spacing-5 + env(safe-area-inset-top)) $spacing-4 $spacing-5;
+  background: linear-gradient(135deg, $purple-700, $purple-800);
+  border-bottom-left-radius: $border-radius-xl;
+  border-bottom-right-radius: $border-radius-xl;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: headerPop 0.6s ease-out;
+
+  .vault-header-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    margin-bottom: $spacing-3;
+    animation: fadeIn 0.6s ease-out;
+
+    .vault-header-icon {
+      font-size: $font-size-2xl; // 原 22px，整体放大
+    }
+
+    .vault-header-title {
+      font-size: $font-size-xl;  // 原 20px
+      font-weight: $font-weight-bold;
+      line-height: 1.2;
+    }
+  }
+
+  .vault-header-desc {
+    font-size: $font-size-sm; // 原 12px
+    color: $purple-100;
+    line-height: 1.6;
+    opacity: 0.95;
+    animation: slideUpSm 0.55s ease-out;
+  }
+}
+
+/* ===========================================================
+   Tabs 区域 · 顶部导航条风格
+=========================================================== */
+.tabs-container {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background-color: rgba(15, 23, 42, 0.96);
+  padding: $spacing-3 $spacing-4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+
+  .tabs {
+    display: flex;
+    gap: $spacing-2;
+
+    .tab {
+      flex: 1;
+      padding: $spacing-3 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-2;
+      border-radius: $border-radius-lg;
+      background-color: $gray-900;
+      color: $gray-400;
+      opacity: 0.9;
+      transition: all 0.25s ease-out;
+      min-height: 40px; // 提升点击区域
+
+      &:active {
+        transform: scale(0.97);
+        opacity: 1;
+      }
+
+      &.tab-active {
+        background-color: $orange-500;
+        color: white;
+        opacity: 1;
+        box-shadow: 0 4px 14px rgba(249, 115, 22, 0.45);
+      }
+
+      .tab-icon {
+        font-size: $font-size-lg; // 原 15px
+      }
+
+      .tab-text {
+        font-size: $font-size-sm; // 原 13px
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   主内容区 · 保持窄宽度 + 统一内边距
+=========================================================== */
+.content {
+  flex: 1;
+  padding: $spacing-5 $spacing-4 $spacing-6;
+  animation: fadeIn 0.35s ease-out;
+}
+
+/* ===========================================================
+   Stats 卡片 · 上方关键数据
+=========================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-4;        // 间距加大
+  margin-bottom: $spacing-6;
+
+  @media (max-width: 340px) {
+    grid-template-columns: 1fr; // 极小屏幕下单列，避免拥挤
+  }
+
+  .stat-card {
+    border-radius: $border-radius-lg;
+    padding: $spacing-4 $spacing-4 $spacing-5;
+    transform: translateY(0);
+    transition: transform 0.22s ease-out, box-shadow 0.22s ease-out;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    &.stat-card-blue {
+      background: linear-gradient(145deg, $blue-500, $blue-700);
+    }
+
+    &.stat-card-green {
+      background: linear-gradient(145deg, $green-500, $green-700);
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      margin-bottom: $spacing-2;
+
+      .stat-icon {
+        font-size: $font-size-xl;
+      }
+
+      .stat-label {
+        font-size: $font-size-sm;
+        opacity: 0.95;
+      }
+    }
+
+    .stat-value {
+      font-size: $font-size-2xl; // 原 22px
+      font-weight: $font-weight-bold;
+      line-height: 1.25;
+    }
+
+    .stat-sublabel {
+      font-size: $font-size-xs; // 原 10px
+      margin-top: $spacing-1;
+      opacity: 0.85;
+    }
+  }
+}
+
+/* ===========================================================
+   年化收益 APY 区块
+=========================================================== */
+.annual-rate {
+  padding: $spacing-4 $spacing-4 $spacing-5;
+  border-radius: $border-radius-lg;
+  background-color: $orange-500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-4;
+  margin-bottom: $spacing-6;
+  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.4);
+  animation: fadeIn 0.4s ease-out;
+
+  .annual-title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+  }
+
+  .annual-subtitle {
+    font-size: $font-size-sm;
+    margin-top: $spacing-1;
+    color: $orange-100;
+    line-height: 1.6;
+  }
+
+  .annual-value-wrapper {
+    text-align: right;
+
+    .annual-value {
+      font-size: $font-size-3xl; // 原 28px
+      font-weight: $font-weight-bold;
+      line-height: 1.1;
+    }
+
+    .annual-apy {
+      font-size: $font-size-xs;
+      margin-top: $spacing-1;
+      color: $orange-100;
+    }
+  }
+}
+
+/* ===========================================================
+   Stake 列表区
+=========================================================== */
+.stakes-section {
+  margin-bottom: $spacing-8;
+
+  .section-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-3;
+  }
+
+  .stakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+
+    .stake-item {
+      background-color: $gray-800;
+      border-radius: $border-radius-lg;
+      padding: $spacing-4;
+      animation: fadeIn 0.3s ease-out;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+
+      .stake-header {
+        display: flex;
+        justify-content: space-between;
+        gap: $spacing-4;
+        margin-bottom: $spacing-3;
+
+        .stake-name {
+          font-size: $font-size-base;
+          font-weight: $font-weight-semibold;
+        }
+
+        .stake-amount {
+          font-size: $font-size-xs;
+          color: $gray-400;
+        }
+
+        .stake-values {
+          text-align: right;
+
+          .stake-value {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $orange-400;
+          }
+
+          .stake-reward {
+            font-size: $font-size-xs;
+            color: $green-400;
+            margin-top: $spacing-1;
+          }
+        }
+      }
+
+      .stake-progress {
+        margin-bottom: $spacing-3;
+
+        .progress-header,
+        .progress-dates {
+          display: flex;
+          justify-content: space-between;
+          font-size: $font-size-xs;
+          color: $gray-400;
+        }
+
+        .progress-header {
+          margin-bottom: $spacing-1;
+        }
+
+        .progress-bar {
+          width: 100%;
+          height: 8px;
+          border-radius: 999px;
+          overflow: hidden;
+          background-color: $gray-700;
+          margin: $spacing-1 0;
+
+          .progress-fill {
+            height: 100%;
+            background-color: $orange-500;
+            transition: width 0.35s ease-out;
+          }
+        }
+      }
+
+      .stake-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: $spacing-1;
+
+        .stake-daily {
+          display: flex;
+          align-items: center;
+          gap: $spacing-1;
+
+          .stake-daily-icon {
+            font-size: $font-size-sm;
+          }
+
+          .stake-daily-text {
+            font-size: $font-size-sm;
+            color: $blue-400;
+          }
+        }
+
+        .stake-status {
+          padding: $spacing-1 $spacing-3;
+          border-radius: $border-radius-md;
+          font-size: $font-size-xs;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 24px;
+
+          &.status-active {
+            background-color: rgba(34, 197, 94, 0.18);
+
+            .stake-status-text {
+              color: $green-400;
+            }
+          }
+
+          &.status-locked {
+            background-color: rgba(107, 114, 128, 0.28);
+
+            .stake-status-text {
+              color: $gray-300;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   空状态 Empty
+=========================================================== */
+.empty-state {
+  padding: $spacing-12 0;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: $spacing-4;
+  }
+
+  .empty-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  .empty-desc {
+    margin: $spacing-2 0 $spacing-4;
+    font-size: $font-size-sm;
+    color: $gray-400;
+    padding: 0 $spacing-8;
+    line-height: 1.7;
+  }
+
+  .empty-button {
+    background-color: $orange-500;
+    padding: $spacing-3 $spacing-6;
+    border-radius: $border-radius-lg;
+    transition: background-color 0.2s ease-out;
+
+    &:active {
+      background-color: $orange-600;
+    }
+
+    .empty-button-text {
+      color: white;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+/* ===========================================================
+   Rewards 奖励列表
+=========================================================== */
+.rewards-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  margin-bottom: $spacing-10;
+
+  .reward-item {
+    background-color: $gray-800;
+    padding: $spacing-4;
+    border-radius: $border-radius-lg;
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-4;
+    animation: fadeIn 0.3s ease-out;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+    .reward-date {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $spacing-1;
+    }
+
+    .reward-label {
+      font-size: $font-size-sm;
+      color: $gray-400;
+    }
+
+    .reward-values {
+      text-align: right;
+
+      .reward-amount {
+        color: $green-400;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+      }
+
+      .reward-cumulative {
+        font-size: $font-size-xs;
+        color: $gray-400;
+        margin-top: $spacing-1;
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   底部弹窗 Modal
+=========================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  z-index: 50;
+
+  .modal-content {
+    width: 100%;
+    max-height: 85vh;
+    background-color: $gray-800;
+    border-radius: $border-radius-xl $border-radius-xl 0 0;
+    padding: $spacing-5;
+    overflow-y: auto;
+    animation: slideUp 0.38s ease-out;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-4;
+
+      .modal-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+      }
+
+      .modal-close {
+        font-size: 28px;
+        color: $gray-400;
+        padding: 0 $spacing-1;
+
+        &:active {
+          color: white;
+        }
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-4;
+      margin-top: $spacing-1;
+
+      .form-item {
+        .form-label {
+          font-size: $font-size-sm;
+          color: $gray-400;
+          margin-bottom: $spacing-2;
+        }
+
+        .form-select,
+        .form-input {
+          width: 100%;
+          padding: $spacing-3;
+          background-color: $gray-700;
+          border-radius: $border-radius-lg;
+          color: white;
+          font-size: $font-size-base;
+        }
+
+        .duration-buttons {
+          margin-top: $spacing-2;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: $spacing-2;
+
+          .duration-btn {
+            padding: $spacing-2 0;
+            border-radius: $border-radius-md;
+            background-color: $gray-700;
+            text-align: center;
+
+            &.duration-btn-active {
+              background-color: $orange-500;
+            }
+
+            .duration-btn-text {
+              font-size: $font-size-sm;
+            }
+          }
+        }
+      }
+
+      .stake-info {
+        background-color: $gray-700;
+        padding: $spacing-4;
+        border-radius: $border-radius-lg;
+
+        .stake-info-title {
+          font-size: $font-size-base;
+          margin-bottom: $spacing-2;
+          font-weight: $font-weight-semibold;
+        }
+
+        .stake-info-row {
+          display: flex;
+          justify-content: space-between;
+          margin: $spacing-2 0;
+
+          .stake-info-label {
+            color: $gray-400;
+            font-size: $font-size-sm;
+          }
+
+          .stake-info-value {
+            font-size: $font-size-sm;
+          }
+        }
+      }
+
+      .confirm-button {
+        background-color: $orange-500;
+        padding: $spacing-4;
+        border-radius: $border-radius-lg;
+        text-align: center;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        margin-top: $spacing-2;
+
+        &:active {
+          background-color: $orange-600;
+        }
+
+        &.confirm-button-disabled {
+          background-color: $gray-600;
+        }
+      }
+    }
+  }
+}
+
+/* ===========================================================
+   确认弹窗内容
+=========================================================== */
+.confirm-header {
+  text-align: center;
+  margin-bottom: $spacing-5;
+
+  .confirm-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background-color: $green-500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto $spacing-3;
+
+    .confirm-icon-text {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  .confirm-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-1;
+  }
+
+  .confirm-subtitle {
+    font-size: $font-size-sm;
+    color: $gray-400;
+  }
+}
+
+.confirm-info {
+  background-color: $gray-700;
+  padding: $spacing-4;
+  border-radius: $border-radius-lg;
+  margin-bottom: $spacing-5;
+
+  .confirm-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing-2 0;
+    font-size: $font-size-sm;
+
+    .confirm-info-label {
+      color: $gray-400;
+    }
+
+    .confirm-info-value {
+      color: white;
+    }
+
+    .confirm-info-value-green {
+      color: $green-400;
+    }
+  }
+
+  .confirm-info-divider {
+    border-top: 1px solid $gray-600;
+    margin: $spacing-3 0;
+  }
+}
+
+.confirm-actions {
+  display: flex;
+  gap: $spacing-3;
+
+  .confirm-action-back,
+  .confirm-action-submit {
+    flex: 1;
+    padding: $spacing-3 0;
+    text-align: center;
+    border-radius: $border-radius-lg;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+  }
+
+  .confirm-action-back {
+    background-color: $gray-700;
+
+    &:active {
+      background-color: $gray-600;
+    }
+  }
+
+  .confirm-action-submit {
+    background-color: $green-500;
+
+    &:active {
+      background-color: $green-600;
+    }
+  }
+}
+
+/* ===========================================================
+   动画定义
+=========================================================== */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpSm {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes headerPop {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

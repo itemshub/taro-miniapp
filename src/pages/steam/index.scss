@@ -1,0 +1,333 @@
+.steam-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  &.loading-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.page-header {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  
+  .page-title {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-subtitle {
+    display: block;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.loading {
+  .loading-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+  }
+}
+
+.bound-account {
+  padding: 1rem;
+}
+
+.account-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.account-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    margin-right: 1rem;
+  }
+  
+  .account-info {
+    flex: 1;
+    
+    .username {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333333;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .account-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      
+      .level {
+        font-size: 0.875rem;
+        color: #666666;
+      }
+      
+      .status {
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        
+        &.online {
+          background-color: #f6ffed;
+          
+          .status-text {
+            color: #52c41a;
+          }
+        }
+        
+        &.offline {
+          background-color: #fff2f0;
+          
+          .status-text {
+            color: #ff4d4f;
+          }
+        }
+        
+        .status-text {
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.account-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    
+    .stat-value {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333333;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      color: #666666;
+    }
+  }
+}
+
+.account-actions {
+  display: flex;
+  gap: 0.75rem;
+  
+  .btn-refresh, .btn-unbind {
+    flex: 1;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    
+    &.btn-refresh {
+      background-color: #007AFF;
+      color: white;
+    }
+    
+    &.btn-unbind {
+      background-color: #f0f0f0;
+      color: #666666;
+    }
+  }
+}
+
+.features-list {
+  .features-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  .feature-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    width: 2.5rem;
+    text-align: center;
+  }
+  
+  .feature-text {
+    flex: 1;
+    
+    .feature-name {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 0.25rem;
+    }
+    
+    .feature-desc {
+      font-size: 0.875rem;
+      color: #666666;
+    }
+  }
+}
+
+.unbound-state {
+  padding: 1rem;
+}
+
+.unbound-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  
+  .unbound-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .unbound-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  
+  .unbound-desc {
+    font-size: 1rem;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    display: block;
+  }
+}
+
+.binding-methods {
+  text-align: left;
+  margin-bottom: 2rem;
+  
+  .methods-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}
+
+.method-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  
+  .method-icon {
+    font-size: 1.25rem;
+    margin-right: 1rem;
+    width: 2rem;
+    text-align: center;
+  }
+  
+  .method-info {
+    flex: 1;
+    
+    .method-name {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 0.25rem;
+    }
+    
+    .method-desc {
+      font-size: 0.875rem;
+      color: #666666;
+    }
+  }
+}
+
+.btn-bind {
+  width: 100%;
+  height: 48px;
+  background-color: #007AFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  
+  &[disabled] {
+    background-color: #cccccc;
+  }
+}
+
+// 响应式设计
+@media (max-width: 360px) {
+  .account-header {
+    .avatar {
+      width: 48px;
+      height: 48px;
+      margin-right: 0.75rem;
+    }
+    
+    .account-info {
+      .username {
+        font-size: 1.125rem;
+      }
+    }
+  }
+  
+  .account-stats {
+    .stat-item {
+      padding: 0.75rem;
+      
+      .stat-value {
+        font-size: 1.125rem;
+      }
+    }
+  }
+}

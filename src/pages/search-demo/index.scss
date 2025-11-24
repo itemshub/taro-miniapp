@@ -1,0 +1,305 @@
+@import '../../styles/variables.scss';
+
+.search-demo-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 0;
+}
+
+// 页面头部
+.demo-header {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: $shadow-lg;
+
+  .demo-title {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: $font-weight-bold;
+    color: $light-light;
+    margin-bottom: 0.75rem;
+  }
+
+  .demo-description {
+    display: block;
+    font-size: 1rem;
+    color: rgba($light-light, 0.9);
+    line-height: $line-height-relaxed;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+// 演示区块
+.demo-section {
+  margin: 2rem 1.5rem;
+  background: $light-light;
+  border-radius: $border-radius-xl;
+  padding: 1.5rem;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba($primary, 0.1);
+
+  .section-title {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    display: block;
+    font-size: $font-size-sm;
+    color: $secondary;
+    margin-bottom: 1.5rem;
+    line-height: $line-height-relaxed;
+  }
+}
+
+// 功能特性
+.demo-features {
+  margin: 2rem 1.5rem;
+  background: $light-light;
+  border-radius: $border-radius-xl;
+  padding: 1.5rem;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba($accent, 0.1);
+
+  .features-title {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .feature-item {
+    background: $search-bg;
+    border-radius: $border-radius-lg;
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px solid rgba($primary, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+      border-color: $accent;
+    }
+
+    .feature-icon {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-text {
+      display: block;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $primary;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-desc {
+      display: block;
+      font-size: $font-size-sm;
+      color: $secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+}
+
+// 操作说明
+.demo-instructions {
+  margin: 2rem 1.5rem;
+  background: $light-light;
+  border-radius: $border-radius-xl;
+  padding: 1.5rem;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba($primary, 0.1);
+
+  .instructions-title {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .instructions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .instruction-group {
+    background: $search-bg;
+    border-radius: $border-radius-lg;
+    padding: 1.25rem;
+    border-left: 4px solid $accent;
+
+    .group-title {
+      display: block;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $primary;
+      margin-bottom: 0.75rem;
+    }
+
+    .instruction-item {
+      display: block;
+      font-size: $font-size-sm;
+      color: $secondary;
+      line-height: $line-height-relaxed;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      position: relative;
+
+      &::before {
+        content: '•';
+        color: $accent;
+        font-weight: $font-weight-bold;
+        position: absolute;
+        left: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// 技术实现
+.demo-tech {
+  margin: 2rem 1.5rem;
+  background: linear-gradient(135deg, $primary-light 0%, $primary-lighter 100%);
+  border-radius: $border-radius-xl;
+  padding: 1.5rem;
+  box-shadow: $shadow-lg;
+  color: $light-light;
+
+  .tech-title {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .tech-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .tech-item {
+    display: block;
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+    padding-left: 1rem;
+    position: relative;
+
+    &::before {
+      content: '▶';
+      color: $accent-light;
+      font-weight: $font-weight-bold;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: $breakpoint-sm) {
+  .demo-header {
+    padding: 1.5rem 1rem;
+
+    .demo-title {
+      font-size: 1.5rem;
+    }
+
+    .demo-description {
+      font-size: 0.875rem;
+      max-width: 95%;
+    }
+  }
+
+  .demo-section,
+  .demo-features,
+  .demo-instructions,
+  .demo-tech {
+    margin: 1.5rem 1rem;
+    padding: 1.25rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+
+    .feature-icon {
+      font-size: 1.5rem;
+    }
+
+    .feature-text {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .demo-header {
+    padding: 1.25rem 0.75rem;
+
+    .demo-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .demo-section,
+  .demo-features,
+  .demo-instructions,
+  .demo-tech {
+    margin: 1rem 0.75rem;
+    padding: 1rem;
+    border-radius: $border-radius-lg;
+  }
+}
+
+// 深色模式支持
+@media (prefers-color-scheme: dark) {
+  .search-demo-container {
+    background: linear-gradient(135deg, $dark-dark 0%, $dark 100%);
+  }
+
+  .demo-section,
+  .demo-features,
+  .demo-instructions {
+    background: $dark-light;
+    border-color: rgba($primary-light, 0.2);
+  }
+
+  .feature-item,
+  .instruction-group {
+    background: $dark;
+    border-color: rgba($primary-light, 0.1);
+  }
+
+  .demo-tech {
+    background: linear-gradient(135deg, $primary-dark 0%, $dark-dark 100%);
+  }
+}

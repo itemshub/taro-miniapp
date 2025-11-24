@@ -1,0 +1,394 @@
+@import '../../styles/variables.scss';
+
+.home-container {
+  min-height: 100vh;
+  background-color: $gray-900;
+  color: white;
+  padding-bottom: $spacing-20;
+}
+
+// Header with Search
+.header {
+  background: linear-gradient(to right, $gray-800, $gray-900);
+  padding: $spacing-4;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-bottom: $spacing-4;
+}
+
+.search-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.search-icon-wrapper {
+  position: absolute;
+  left: $spacing-3;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $gray-400;
+  z-index: 1;
+}
+
+.search-icon {
+  color: $gray-400;
+}
+
+.search-input {
+  width: 100%;
+  background-color: $gray-700;
+  color: white;
+  padding: $spacing-3 $spacing-4 $spacing-3 40px;
+  border-radius: $border-radius-lg;
+  border: none;
+  outline: none;
+  
+  &:focus {
+    outline: 2px solid $orange-500;
+    outline-offset: 0;
+  }
+}
+
+.bell-button {
+  padding: $spacing-3;
+  background-color: $orange-500;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: $orange-600;
+  }
+}
+
+// Welcome Message
+.welcome-section {
+  text-align: center;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $orange-500;
+  display: block;
+}
+
+.subtitle {
+  color: $gray-300;
+  font-size: $font-size-sm;
+  margin-top: $spacing-1;
+  display: block;
+}
+
+// Content Section
+.content-section {
+  padding: $spacing-4;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-bottom: $spacing-4;
+}
+
+.section-icon {
+  color: $orange-500;
+}
+
+.section-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.section-title-text {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  display: block;
+  margin-bottom: $spacing-4;
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-4;
+  margin-bottom: $spacing-6;
+}
+
+.stat-card {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+}
+
+.stat-label {
+  color: $gray-400;
+  font-size: $font-size-xs;
+  display: block;
+}
+
+.stat-value {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: white;
+  display: block;
+  margin-top: $spacing-1;
+  
+  &.orange {
+    color: $orange-500;
+  }
+  
+  &.green {
+    color: $green-400;
+  }
+}
+
+.stat-change {
+  font-size: $font-size-xs;
+  display: block;
+  margin-top: $spacing-1;
+  
+  &.positive {
+    color: $green-400;
+  }
+  
+  &.blue {
+    color: $blue-400;
+  }
+}
+
+// Trend Chart
+.chart-card {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  margin-bottom: $spacing-6;
+}
+
+.chart-title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $gray-300;
+  margin-bottom: $spacing-3;
+  display: block;
+}
+
+.chart-wrapper {
+  height: 128px;
+}
+
+// Quick Actions
+.quick-actions-section {
+  margin-bottom: $spacing-6;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-3;
+}
+
+.quick-action-item {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: $gray-700;
+  }
+}
+
+.quick-action-icon {
+  border-radius: $border-radius-lg;
+  padding: $spacing-2;
+  display: inline-flex;
+  margin-bottom: $spacing-2;
+  
+  &.blue {
+    background-color: $blue-500;
+  }
+  
+  &.green {
+    background-color: $green-500;
+  }
+  
+  &.purple {
+    background-color: $purple-500;
+  }
+  
+  &.orange {
+    background-color: $orange-500;
+  }
+}
+
+.icon-white {
+  color: white;
+}
+
+.quick-action-label {
+  font-size: $font-size-xs;
+  color: $gray-300;
+  display: block;
+}
+
+// Hot Cases
+.hot-section {
+  margin-bottom: $spacing-6;
+}
+
+.hot-cases-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.case-item {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: $gray-700;
+  }
+}
+
+.case-image {
+  width: 64px;
+  height: 64px;
+  border-radius: $border-radius-lg;
+  object-fit: cover;
+}
+
+.case-info {
+  flex: 1;
+}
+
+.case-name {
+  font-weight: $font-weight-medium;
+  display: block;
+  margin-bottom: $spacing-1;
+}
+
+.case-price {
+  font-size: $font-size-sm;
+  color: $gray-400;
+  display: block;
+  margin-bottom: $spacing-1;
+}
+
+.case-change {
+  font-size: $font-size-xs;
+  display: block;
+  
+  &.positive {
+    color: $green-400;
+  }
+  
+  &.negative {
+    color: $red-400;
+  }
+}
+
+// Arbitrage
+.arbitrage-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.arbitrage-item {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: $gray-700;
+  }
+}
+
+.arbitrage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-2;
+}
+
+.arbitrage-name {
+  font-weight: $font-weight-medium;
+  flex: 1;
+}
+
+.arbitrage-profit {
+  color: $green-400;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  margin-left: $spacing-2;
+}
+
+.arbitrage-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: $font-size-sm;
+}
+
+.arbitrage-route {
+  color: $gray-400;
+}
+
+.arbitrage-amount {
+  color: $orange-400;
+}
+
+// Announcements
+.announcements-section {
+  margin-bottom: $spacing-20;
+}
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.announcement-item {
+  background-color: $gray-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  border-left: 4px solid $orange-500;
+}
+
+.announcement-title {
+  font-weight: $font-weight-medium;
+  color: white;
+  margin-bottom: $spacing-1;
+  display: block;
+}
+
+.announcement-content {
+  font-size: $font-size-sm;
+  color: $gray-400;
+  margin-bottom: $spacing-2;
+  display: block;
+}
+
+.announcement-date {
+  font-size: $font-size-xs;
+  color: $gray-500;
+  display: block;
+}

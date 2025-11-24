@@ -1,0 +1,207 @@
+.quick-actions {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  
+  &.quick-actions-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &.quick-actions-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.action-item {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    
+    .action-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+  
+  &:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+  
+  &.clicking {
+    animation: clickPulse 0.2s ease-out;
+  }
+  
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+  }
+  
+  // 无障碍访问 - 焦点样式
+  &:focus {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+  }
+  
+  // 波纹效果
+  .ripple-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  &:active .ripple-effect {
+    width: 200px;
+    height: 200px;
+    transition: width 0s, height 0s;
+  }
+}
+
+.action-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.action-icon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  
+  .icon-text {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    background: #FF3B30;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    animation: badgePulse 2s infinite;
+    
+    .badge-text {
+      font-size: 0.625rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+}
+
+.action-text {
+  .action-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+  
+  .action-description {
+    display: block;
+    font-size: 0.75rem;
+    color: #666666;
+    line-height: 1.3;
+  }
+}
+
+// 动画定义
+@keyframes clickPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// 响应式设计
+@media (max-width: 360px) {
+  .action-item {
+    padding: 1rem;
+  }
+  
+  .action-icon {
+    width: 48px;
+    height: 48px;
+    
+    .icon-text {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .action-text {
+    .action-title {
+      font-size: 0.875rem;
+    }
+    
+    .action-description {
+      font-size: 0.6875rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .quick-actions {
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+  
+  .action-item {
+    padding: 1.5rem;
+  }
+}

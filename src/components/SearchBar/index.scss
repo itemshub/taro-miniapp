@@ -1,0 +1,350 @@
+@import '../../styles/variables.scss';
+
+.search-bar-container {
+  position: relative;
+  width: 100%;
+  background: $light-light;
+  padding: $spacing-4 $spacing-4;
+  box-shadow: $shadow-sm;
+  z-index: $z-index-dropdown;
+}
+
+// 搜索输入框容器
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  background: $search-bg;
+  border: 1px solid $search-border;
+  border-radius: $border-radius-2xl;
+  padding: $spacing-3 $spacing-4;
+  transition: all 0.3s ease;
+
+  &:focus-within {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px rgba($accent, 0.1);
+    background: $light-light;
+  }
+}
+
+.search-icon {
+  font-size: $font-size-lg;
+  color: $search-placeholder;
+  margin-right: $spacing-3;
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  font-size: $font-size-base;
+  color: $search-text;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $search-placeholder;
+  }
+}
+
+.search-placeholder {
+  color: $search-placeholder;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: $spacing-2;
+  border-radius: 50%;
+  background: $secondary-light;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $accent-light;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.clear-icon {
+  font-size: $font-size-sm;
+  color: $light-light;
+}
+
+// 搜索建议下拉框
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $light-light;
+  border: 1px solid $search-border;
+  border-radius: $border-radius-lg;
+  margin-top: $spacing-2;
+  box-shadow: $shadow-lg;
+  z-index: $z-index-dropdown;
+  animation: slideDown 0.3s ease;
+}
+
+.suggestions-list {
+  max-height: 300px;
+}
+
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-3 $spacing-4;
+  border-bottom: 1px solid $light-dark;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover,
+  &.selected {
+    background: $primary-lighter;
+    color: $light-light;
+  }
+}
+
+.suggestion-icon {
+  font-size: $font-size-lg;
+  margin-right: $spacing-3;
+  opacity: 0.7;
+}
+
+.suggestion-text {
+  flex: 1;
+  font-size: $font-size-base;
+  color: inherit;
+}
+
+.hot-tag,
+.recent-tag {
+  font-size: $font-size-xs;
+  padding: 2px 6px;
+  border-radius: $border-radius-sm;
+  background: $accent;
+  color: $light-light;
+  margin-left: $spacing-2;
+}
+
+.recent-tag {
+  background: $primary;
+}
+
+// 搜索面板（热门搜索和最近搜索）
+.search-panel {
+  margin-top: $spacing-4;
+  animation: fadeIn 0.3s ease;
+}
+
+.hot-searches-section,
+.recent-searches-section {
+  margin-bottom: $spacing-6;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-3;
+}
+
+.section-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $primary;
+}
+
+.clear-history {
+  font-size: $font-size-sm;
+  color: $accent;
+  cursor: pointer;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($accent, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 热门搜索标签
+.hot-search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+}
+
+.hot-search-tag {
+  background: $hot-tag-bg;
+  color: $hot-tag-text;
+  padding: $spacing-2 $spacing-3;
+  border-radius: $border-radius-lg;
+  border: 1px solid rgba($accent, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    background: $accent;
+    color: $light-light;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 最近搜索列表
+.recent-search-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.recent-search-item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-3 $spacing-4;
+  background: $history-item-bg;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $primary-lighter;
+    color: $light-light;
+    transform: translateX(4px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.recent-icon {
+  font-size: $font-size-lg;
+  margin-right: $spacing-3;
+  opacity: 0.6;
+}
+
+.recent-text {
+  flex: 1;
+  font-size: $font-size-base;
+  color: inherit;
+}
+
+// 动画
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 响应式设计
+@media (max-width: $breakpoint-sm) {
+  .search-bar-container {
+    padding: $spacing-3 $spacing-3;
+  }
+
+  .search-input-container {
+    padding: $spacing-2 $spacing-3;
+  }
+
+  .hot-search-tags {
+    gap: $spacing-1;
+  }
+
+  .hot-search-tag {
+    padding: $spacing-1 $spacing-2;
+    font-size: $font-size-xs;
+  }
+
+  .recent-search-item {
+    padding: $spacing-2 $spacing-3;
+  }
+}
+
+// 深色模式支持（如果需要）
+@media (prefers-color-scheme: dark) {
+  .search-bar-container {
+    background: $dark;
+  }
+
+  .search-input-container {
+    background: $dark-light;
+    border-color: $secondary-light;
+
+    &:focus-within {
+      background: $dark-dark;
+    }
+  }
+
+  .search-input {
+    color: $light-light;
+  }
+
+  .search-suggestions {
+    background: $dark-light;
+    border-color: $secondary-light;
+  }
+
+  .search-suggestion-item {
+    border-bottom-color: $secondary-light;
+
+    &:hover,
+    &.selected {
+      background: $primary;
+    }
+  }
+
+  .search-panel {
+    .section-title {
+      color: $light-light;
+    }
+  }
+
+  .recent-search-item {
+    background: $dark-light;
+
+    &:hover {
+      background: $primary;
+    }
+  }
+}

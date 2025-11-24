@@ -1,0 +1,387 @@
+.market-detail-page {
+  min-height: 100vh;
+  background-color: #111827;
+  padding-bottom: 40px;
+
+  .market-info-card {
+    border-radius: 16px;
+    padding: 48px;
+    margin: 24px;
+    text-align: center;
+
+    &.blue-bg {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    }
+
+    &.green-bg {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+    }
+
+    &.gray-bg {
+      background: linear-gradient(135deg, rgba(107, 114, 128, 0.1) 0%, rgba(75, 85, 99, 0.1) 100%);
+    }
+
+    .market-icon-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+
+      .market-icon {
+        width: 128px;
+        height: 128px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon-text {
+          font-size: 48px;
+        }
+
+        &.blue {
+          color: #60A5FA;
+        }
+
+        &.green {
+          color: #34D399;
+        }
+
+        &.gray {
+          color: #9CA3AF;
+        }
+      }
+    }
+
+    .market-name {
+      font-size: 48px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 16px;
+
+      &.blue {
+        color: #60A5FA;
+      }
+
+      &.green {
+        color: #34D399;
+      }
+
+      &.gray {
+        color: #9CA3AF;
+      }
+    }
+
+    .market-subtitle {
+      font-size: 28px;
+      color: #9CA3AF;
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    .market-meta {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 32px;
+
+      .meta-item {
+        flex: 1;
+        text-align: center;
+
+        .meta-label {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .meta-value {
+          font-size: 36px;
+          font-weight: bold;
+          color: white;
+          display: block;
+        }
+      }
+    }
+
+    .features-section {
+      text-align: left;
+
+      .features-title {
+        font-size: 32px;
+        font-weight: 500;
+        color: white;
+        display: block;
+        margin-bottom: 16px;
+      }
+
+      .features-list {
+        .feature-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+
+          .feature-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 16px;
+
+            &.blue {
+              background-color: #60A5FA;
+            }
+
+            &.green {
+              background-color: #34D399;
+            }
+
+            &.gray {
+              background-color: #9CA3AF;
+            }
+          }
+
+          .feature-text {
+            font-size: 28px;
+            color: #D1D5DB;
+          }
+        }
+      }
+    }
+  }
+
+  .section {
+    margin: 24px;
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: white;
+      display: block;
+      margin-bottom: 32px;
+    }
+  }
+
+  .stats-grid {
+    display: flex;
+    gap: 32px;
+
+    .stat-card {
+      flex: 1;
+      background-color: #1F2937;
+      border-radius: 16px;
+      padding: 32px;
+
+      .stat-label {
+        font-size: 28px;
+        color: #9CA3AF;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .stat-value {
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .stat-trend {
+        font-size: 28px;
+        display: block;
+
+        &.positive {
+          color: #34D399;
+        }
+
+        &.info {
+          color: #60A5FA;
+        }
+      }
+    }
+  }
+
+  .skin-list {
+    .skin-item {
+      background-color: #1F2937;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+
+      .skin-image {
+        width: 128px;
+        height: 128px;
+        border-radius: 16px;
+        margin-right: 32px;
+      }
+
+      .skin-info {
+        flex: 1;
+
+        .skin-name {
+          font-size: 32px;
+          font-weight: 500;
+          color: white;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .skin-type {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+          margin-bottom: 16px;
+        }
+
+        .skin-price-row {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+
+          .skin-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FB923C;
+          }
+
+          .skin-change {
+            font-size: 28px;
+
+            &.positive {
+              color: #34D399;
+            }
+
+            &.negative {
+              color: #F87171;
+            }
+          }
+        }
+      }
+
+      .nav-button {
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 28px;
+
+        &.blue {
+          background-color: #2563EB;
+          color: white;
+          border-color: #2563EB;
+        }
+
+        &.green {
+          background-color: #059669;
+          color: white;
+          border-color: #059669;
+        }
+
+        &.gray {
+          background-color: #4B5563;
+          color: white;
+          border-color: #4B5563;
+        }
+      }
+    }
+  }
+
+  .comparison-card {
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 32px;
+
+    .comparison-subtitle {
+      font-size: 28px;
+      color: #9CA3AF;
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    .comparison-list {
+      .comparison-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        margin-bottom: 24px;
+        background-color: #374151;
+        border-radius: 12px;
+
+        &.highlight {
+          background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+          border: 2px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .comparison-platform {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          .platform-name {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+          }
+
+          .current-badge {
+            font-size: 24px;
+            color: #FB923C;
+            background-color: rgba(251, 146, 60, 0.2);
+            padding: 4px 12px;
+            border-radius: 8px;
+          }
+        }
+
+        .comparison-price {
+          text-align: right;
+
+          .price-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            display: block;
+            margin-bottom: 4px;
+          }
+
+          .change-text {
+            font-size: 28px;
+            display: block;
+
+            &.positive {
+              color: #34D399;
+            }
+
+            &.negative {
+              color: #F87171;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 32px;
+    margin: 48px 24px 24px;
+
+    .action-button {
+      flex: 1;
+      padding: 32px;
+      border-radius: 16px;
+      font-size: 32px;
+      font-weight: 500;
+
+      &.primary {
+        background-color: #2563EB;
+        color: white;
+      }
+
+      &.secondary {
+        background-color: #374151;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,477 @@
+.vault-stake-page {
+  min-height: 100vh;
+  background-color: #111827;
+  padding-bottom: 40px;
+
+  .confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
+
+    .confirm-modal {
+      background-color: #1F2937;
+      border-radius: 32px 32px 0 0;
+      width: 100%;
+      padding: 48px;
+
+      .confirm-header {
+        text-align: center;
+        margin-bottom: 48px;
+
+        .confirm-icon {
+          width: 128px;
+          height: 128px;
+          background-color: #10B981;
+          border-radius: 50%;
+          margin: 0 auto 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .icon-text {
+            font-size: 64px;
+            color: white;
+          }
+        }
+
+        .confirm-title {
+          font-size: 36px;
+          font-weight: bold;
+          color: white;
+          display: block;
+          margin-bottom: 16px;
+        }
+
+        .confirm-subtitle {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+        }
+      }
+
+      .confirm-details {
+        background-color: #374151;
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 48px;
+
+        .details-title {
+          font-size: 32px;
+          font-weight: 500;
+          color: white;
+          display: block;
+          margin-bottom: 24px;
+        }
+
+        .detail-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 16px 0;
+          border-bottom: 1px solid #4B5563;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &.highlight {
+            font-weight: bold;
+            padding-top: 24px;
+            border-top: 2px solid #4B5563;
+          }
+
+          .detail-label {
+            font-size: 28px;
+            color: #9CA3AF;
+          }
+
+          .detail-value {
+            font-size: 28px;
+            color: white;
+
+            &.green {
+              color: #34D399;
+            }
+          }
+        }
+      }
+
+      .confirm-actions {
+        display: flex;
+        gap: 24px;
+
+        .confirm-button {
+          flex: 1;
+          padding: 32px;
+          border-radius: 16px;
+          font-size: 32px;
+          font-weight: 500;
+
+          &.cancel {
+            background-color: #374151;
+            color: white;
+          }
+
+          &.submit {
+            background-color: #10B981;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .info-banner {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px;
+
+    .banner-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+
+      .banner-icon {
+        font-size: 40px;
+      }
+
+      .banner-title {
+        font-size: 32px;
+        font-weight: 500;
+        color: #60A5FA;
+      }
+    }
+
+    .banner-content {
+      .banner-item {
+        font-size: 28px;
+        color: #D1D5DB;
+        line-height: 1.6;
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .section {
+    margin: 24px;
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: white;
+      display: block;
+      margin-bottom: 32px;
+    }
+  }
+
+  .case-list {
+    .case-item {
+      background-color: #1F2937;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      &.selected {
+        background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+        border: 2px solid #F97316;
+      }
+
+      .case-image {
+        width: 128px;
+        height: 128px;
+        border-radius: 16px;
+        margin-right: 32px;
+      }
+
+      .case-info {
+        flex: 1;
+
+        .case-name {
+          font-size: 32px;
+          font-weight: 500;
+          color: white;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .case-description {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+          margin-bottom: 16px;
+        }
+
+        .case-price-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .case-price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FB923C;
+          }
+
+          .case-change {
+            font-size: 28px;
+
+            &.positive {
+              color: #34D399;
+            }
+
+            &.negative {
+              color: #F87171;
+            }
+          }
+        }
+      }
+
+      .check-icon {
+        width: 48px;
+        height: 48px;
+        background-color: #F97316;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .check-text {
+          font-size: 32px;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .amount-card {
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 32px;
+
+    .amount-label {
+      font-size: 28px;
+      color: #9CA3AF;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .amount-control {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+
+      .amount-button {
+        width: 80px;
+        height: 80px;
+        background-color: #374151;
+        color: white;
+        border-radius: 12px;
+        font-size: 40px;
+      }
+
+      .amount-input {
+        flex: 1;
+        background-color: #374151;
+        color: white;
+        padding: 24px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+      }
+    }
+
+    .amount-total {
+      font-size: 28px;
+      color: #9CA3AF;
+      display: block;
+      margin-top: 16px;
+    }
+  }
+
+  .duration-list {
+    .duration-item {
+      background-color: #1F2937;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &.selected {
+        background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+        border: 2px solid #F97316;
+      }
+
+      .duration-info {
+        flex: 1;
+
+        .duration-header {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          margin-bottom: 8px;
+
+          .duration-days {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+          }
+
+          .duration-rate {
+            font-size: 32px;
+            font-weight: bold;
+            color: #34D399;
+          }
+        }
+
+        .duration-description {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+        }
+      }
+
+      .check-icon {
+        width: 48px;
+        height: 48px;
+        background-color: #F97316;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .check-text {
+          font-size: 32px;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .reward-card {
+    background-color: #1F2937;
+    border-radius: 16px;
+    padding: 32px;
+
+    .reward-summary {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 32px;
+
+      .reward-item {
+        text-align: center;
+
+        .reward-label {
+          font-size: 28px;
+          color: #9CA3AF;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .reward-value {
+          font-size: 40px;
+          font-weight: bold;
+          color: white;
+          display: block;
+
+          &.orange {
+            color: #FB923C;
+          }
+        }
+      }
+    }
+
+    .reward-details {
+      border-top: 2px solid #374151;
+      padding-top: 32px;
+
+      .reward-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .reward-detail-label {
+          font-size: 28px;
+          color: #9CA3AF;
+        }
+
+        .reward-detail-value {
+          font-size: 28px;
+          color: white;
+
+          &.green {
+            color: #34D399;
+
+            &.large {
+              font-size: 36px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .warning-card {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+    border: 2px solid rgba(251, 191, 36, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+
+    .warning-title {
+      font-size: 32px;
+      font-weight: 500;
+      color: #FBBF24;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .warning-content {
+      .warning-item {
+        font-size: 28px;
+        color: #D1D5DB;
+        line-height: 1.6;
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .action-section {
+    margin: 48px 24px 24px;
+
+    .confirm-stake-button {
+      width: 100%;
+      background-color: #F97316;
+      color: white;
+      padding: 32px;
+      border-radius: 16px;
+      font-size: 36px;
+      font-weight: bold;
+
+      &.disabled {
+        background-color: #4B5563;
+        opacity: 0.5;
+      }
+    }
+  }
+}
