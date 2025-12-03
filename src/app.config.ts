@@ -34,25 +34,25 @@ export default defineAppConfig({
         iconPath: 'assets/icons/trending-up.png',
         selectedIconPath: 'assets/icons/trending-up-white.png',
         text: '市场'
-      },
-      {
-        pagePath: 'pages/arbitrage/index',
-        iconPath: 'assets/icons/graduation-cap.png',
-        selectedIconPath: 'assets/icons/graduation-cap-white.png',
-        text: '套利'
-      },
-      {
-        pagePath: 'pages/vault/index',
-        iconPath: 'assets/icons/landmark.png',
-        selectedIconPath: 'assets/icons/landmark-white.png',
-        text: '质押'
-      },
-      {
-        pagePath: 'pages/profile/index',
-        iconPath: 'assets/icons/shield-user.png',
-        selectedIconPath: 'assets/icons/shield-user-white.png',
-        text: '我的'
       }
+      // {
+      //   pagePath: 'pages/arbitrage/index',
+      //   iconPath: 'assets/icons/graduation-cap.png',
+      //   selectedIconPath: 'assets/icons/graduation-cap-white.png',
+      //   text: '套利'
+      // },
+      // {
+      //   pagePath: 'pages/vault/index',
+      //   iconPath: 'assets/icons/landmark.png',
+      //   selectedIconPath: 'assets/icons/landmark-white.png',
+      //   text: '质押'
+      // },
+      // {
+      //   pagePath: 'pages/profile/index',
+      //   iconPath: 'assets/icons/shield-user.png',
+      //   selectedIconPath: 'assets/icons/shield-user-white.png',
+      //   text: '我的'
+      // }
     ]
   },
   lazyCodeLoading: 'requiredComponents'

@@ -210,7 +210,7 @@ const Home = () => {
               <View 
                 key={caseItem.id} 
                 className="case-item"
-                onClick={() => handleCaseClick(caseItem.id)}
+                // onClick={() => handleCaseClick(caseItem.id)}
               >
                 <Image 
                   src={caseItem.img_url} 
@@ -239,9 +239,9 @@ const Home = () => {
           <View className="arbitrage-list">
             {indexData.topSkinSub.map((arbitrage:any) => (
               <View 
-                key={arbitrage.skin.id}
+                key={arbitrage.skin.skin}
                 className="arbitrage-item"
-                onClick={() => handleArbitrageClick(arbitrage.skin.id)}
+                // onClick={() => handleArbitrageClick(arbitrage.skin.id)}
               >
                 <View className="arbitrage-header">
                   <Text className="arbitrage-name">{getSkinsNameById(cases,arbitrage.skin.skin) ? getSkinsNameById(cases,arbitrage.skin.skin).name : ""}</Text>

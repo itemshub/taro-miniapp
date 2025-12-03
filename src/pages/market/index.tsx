@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Input, ScrollView, Image, Picker } from '@tarojs/components';
 import Taro, { useReady } from '@tarojs/taro';
 import { mockSkins,mockCase } from '../../data/mockData';
 import { SkinItem } from '../../types';
 import './index.scss';
+import { api_case, api_index } from '@/utils/request';
+import { getSkinsById } from '@/utils/utils';
 
 const Market = () => {
   const [skins, setSkins] = useState<any[]>(mockCase);
@@ -14,6 +16,24 @@ const Market = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'price' | 'change' | 'name'>('price');
   const [showFilters, setShowFilters] = useState(false);
+
+  const [indexData, setIndexData] = useState<any>({});
+  const [cases, setCases] = useState<any>(mockSkins);
+  useEffect(() => {
+  const load = async () => {
+    try {
+      const data= await api_index()
+      setIndexData(data?.data);
+      console.log(data?.data)
+      const cs = await api_case();
+      setCases(cs?.data);
+    } catch (err) {
+      console.error("请求失败:", err);
+    }
+  };
+
+  load();
+}, []);
 
   const categories = ['全部', 'AK', 'M4', 'AWP', 'USP', 'Pistol', 'Rifle'];
   const rarities = [
@@ -49,12 +69,12 @@ const Market = () => {
     rarity: string = selectedRarity,
     source: string = selectedSource
   ) => {
-    let filtered = [...mockCase];
+    let filtered = cases;
 
     if (search) {
       const lowerSearch = search.toLowerCase();
       filtered = filtered.filter(
-        (skin) =>
+        (skin:any) =>
           skin.name.toLowerCase().includes(lowerSearch) ||
           skin.id.toLowerCase().includes(lowerSearch)
       );
@@ -84,7 +104,7 @@ const Market = () => {
       }
     });
 
-    setSkins(filtered);
+    setCases(filtered);
   };
 
   const handleSearch = () => {
@@ -127,6 +147,15 @@ const Market = () => {
       filterSkins();
     }, 0);
   };
+
+
+  if(!indexData?.skins)
+  {
+    return (
+      <View></View>
+    )
+  }
+  
 
   return (
     <View className="market-page">
@@ -250,16 +279,16 @@ const Market = () => {
 
       {/* Skins List */}
       <ScrollView scrollY className="skins-list">
-        {skins.length === 0 ? (
+        {cases.length === 0 ? (
           <View className="empty-state">
             <View className="empty-text">没有找到匹配的饰品</View>
           </View>
         ) : viewMode === 'grid' ? (
           <View className="grid-view">
-            {skins.map((skin) => (
+            {cases.map((skin:any) => (
               <View
                 key={skin.id}
-                onClick={() => handleSkinClick(skin.id)}
+                // onClick={() => handleSkinClick(skin.id)}
                 className="grid-item"
               >
                 <View className="item-image-wrapper">
@@ -281,7 +310,7 @@ const Market = () => {
                   <View className="item-skin">{skin.id}</View>
                   <View className="item-footer">
                     <View className="item-price">
-                      {/* ¥{skin.price.toFixed(2)} */}
+                      ${Number((getSkinsById(indexData.skins,skin.id) ? getSkinsById(indexData.skins,skin.id).price : 0  )).toFixed(2)}
                     </View>
                     <View
                       className={`item-change ${
@@ -289,14 +318,15 @@ const Market = () => {
                       }`}
                     >
                       <View
-                        className={
-                          skin?.change24h >= 0
-                            ? 'icon-trending-up'
-                            : 'icon-trending-down'
-                        }
+                        className={'icon-trending-up'}
                       />
-                      {Math.abs(skin?.change24h).toFixed(1)}%
+                      ± {Number((getSkinsById(indexData.skins,skin.id) ? getSkinsById(indexData.skins,skin.id).averageSub*100 : 0  )).toFixed(2)}%
                     </View>
+
+                    <View className="item-change">
+                      {Number((getSkinsById(indexData.skins,skin.id) ? getSkinsById(indexData.skins,skin.id).offers : 0  )).toFixed(0)} Offers
+                    </View>
+                  
                   </View>
                 </View>
               </View>
