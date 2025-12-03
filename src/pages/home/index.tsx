@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Taro from '@tarojs/taro';
 import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
 import { Search, TrendingUp, Package, Vault, Gamepad2, Bell, BarChart3 } from 'lucide-react';
-import { mockDashboardStats, mockCases, mockArbitrage, mockAnnouncements } from '../../data/mockData';
+import { mockDashboardStats, mockCases, mockArbitrage, mockAnnouncements, mockCase, mockSkins } from '../../data/mockData';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import './index.scss';
+import { api_case, api_index } from '@/utils/request';
+import { getSkinsById, getSkinsNameById } from '@/utils/utils';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [indexData, setIndexData] = useState<any>({});
+  const [cases, setCases] = useState<any>(mockSkins);
+  useEffect(() => {
+  const load = async () => {
+    try {
+      const data= await api_index()
+      setIndexData(data?.data);
+      console.log(data?.data)
+      const cs = await api_case();
+      setCases(cs?.data);
+    } catch (err) {
+      console.error("请求失败:", err);
+    }
+  };
+
+  load();
+}, []);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -63,11 +82,19 @@ const Home = () => {
     });
   };
 
+
+  if(!indexData?.skins)
+  {
+    return (
+      <View></View>
+    )
+  }
+
   return (
     <ScrollView scrollY className="home-container">
       {/* Header with Search */}
       <View className="header">
-        <View className="search-section">
+        {/* <View className="search-section">
           <View className="search-wrapper">
             <View className="search-icon-wrapper">
               <Search className="search-icon" size={18} />
@@ -84,12 +111,12 @@ const Home = () => {
           <View className="bell-button" onClick={handleBellClick}>
             <Bell size={20} />
           </View>
-        </View>
+        </View> */}
         
         {/* Welcome Message */}
         <View className="welcome-section">
           <Text className="title">ITEMSHUB</Text>
-          <Text className="subtitle">专业的CS2饰品交易平台</Text>
+          <Text className="subtitle">专业的CS2饰品套利平台</Text>
         </View>
       </View>
 
@@ -101,28 +128,30 @@ const Home = () => {
         </View>
         
         <View className="stats-grid">
+
+          
           <View className="stat-card">
-            <Text className="stat-label">今日交易额</Text>
-            <Text className="stat-value">¥{(mockDashboardStats.totalVolume / 10000).toFixed(1)}万</Text>
-            <Text className="stat-change positive">↗ +2.3%</Text>
+            <Text className="stat-label">平均价差</Text>
+            <Text className="stat-value orange">+{(indexData.skinsAverageSub*100).toFixed(3)}%</Text>
+            <Text className="stat-change positive">{indexData.skins.length} 种箱子</Text>
           </View>
           
           <View className="stat-card">
-            <Text className="stat-label">箱子平均涨跌</Text>
-            <Text className="stat-value orange">+{mockDashboardStats.avgCaseChange}%</Text>
-            <Text className="stat-change positive">↗ 良好</Text>
-          </View>
-          
-          <View className="stat-card">
-            <Text className="stat-label">套利机会</Text>
-            <Text className="stat-value">{mockDashboardStats.arbitrageOpportunities}</Text>
-            <Text className="stat-change blue">↗ 新增</Text>
+            <Text className="stat-label">大额套利机会</Text>
+            <Text className="stat-value">{indexData.greatProfit}</Text>
+            <Text className="stat-change blue">↗ 25%+ 价差</Text>
           </View>
           
           <View className="stat-card">
             <Text className="stat-label">全网收益指数</Text>
-            <Text className="stat-value green">{mockDashboardStats.globalProfitIndex}</Text>
-            <Text className="stat-change positive">↗ 历史高</Text>
+            <Text className="stat-value green">{(indexData.profitRate).toFixed(3)}</Text>
+            <Text className="stat-change positive">↗ 高</Text>
+          </View>
+
+          <View className="stat-card">
+            <Text className="stat-label">上次更新</Text>
+            <Text className="stat-value">{(new Date(indexData.lastUpdateTime)).toLocaleString()}</Text>
+            <Text className="stat-change positive">· Online</Text>
           </View>
         </View>
 
@@ -152,7 +181,7 @@ const Home = () => {
         </View>
 
         {/* Quick Actions */}
-        <View className="quick-actions-section">
+        {/* <View className="quick-actions-section">
           <Text className="section-title-text">快捷入口</Text>
           <View className="quick-actions-grid">
             {quickActions.map((action, index) => {
@@ -171,28 +200,32 @@ const Home = () => {
               );
             })}
           </View>
-        </View>
+        </View> */}
 
         {/* Hot Cases */}
         <View className="hot-section">
           <Text className="section-title-text">热门箱子</Text>
           <View className="hot-cases-list">
-            {mockCases.slice(0, 3).map((caseItem) => (
+            {cases.slice(0, 3).map((caseItem:any) => (
               <View 
                 key={caseItem.id} 
                 className="case-item"
                 onClick={() => handleCaseClick(caseItem.id)}
               >
                 <Image 
-                  src={caseItem.image} 
+                  src={caseItem.img_url} 
                   className="case-image"
                   mode="aspectFill"
                 />
                 <View className="case-info">
                   <Text className="case-name">{caseItem.name}</Text>
-                  <Text className="case-price">¥{caseItem.price.toFixed(2)}</Text>
-                  <Text className={`case-change ${caseItem.change24h >= 0 ? 'positive' : 'negative'}`}>
-                    {caseItem.change24h >= 0 ? '↗' : '↘'} {Math.abs(caseItem.change24h)}%
+                  <Text className="case-price">${(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).price : 0  ).toFixed(2)}</Text>
+                  <Text className={`case-change positive`}>
+                    ± {(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).averageSub*100 : 0  ).toFixed(2)}%
+                  </Text>
+
+                  <Text className={`case-change`}>
+                    {(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).offers : 0  ).toFixed(0)} Offers
                   </Text>
                 </View>
               </View>
@@ -202,26 +235,26 @@ const Home = () => {
 
         {/* Hot Arbitrage */}
         <View className="hot-section">
-          <Text className="section-title-text">热门套利</Text>
+          <Text className="section-title-text">高额可套利价差</Text>
           <View className="arbitrage-list">
-            {mockArbitrage.slice(0, 2).map((arbitrage) => (
+            {indexData.topSkinSub.map((arbitrage:any) => (
               <View 
-                key={arbitrage.id}
+                key={arbitrage.skin.id}
                 className="arbitrage-item"
-                onClick={() => handleArbitrageClick(arbitrage.id)}
+                onClick={() => handleArbitrageClick(arbitrage.skin.id)}
               >
                 <View className="arbitrage-header">
-                  <Text className="arbitrage-name">{arbitrage.skin.name} {arbitrage.skin.skin}</Text>
+                  <Text className="arbitrage-name">{getSkinsNameById(cases,arbitrage.skin.skin) ? getSkinsNameById(cases,arbitrage.skin.skin).name : ""}</Text>
                   <Text className="arbitrage-profit">
-                    +{arbitrage.profitPercentage.toFixed(1)}%
+                    +{(arbitrage.skin.averageSub*100).toFixed(3)}%
                   </Text>
                 </View>
                 <View className="arbitrage-footer">
                   <Text className="arbitrage-route">
-                    {arbitrage.markets.buy.platform} → {arbitrage.markets.sell.platform}
+                    {arbitrage.from.name} → {arbitrage.to.name}
                   </Text>
                   <Text className="arbitrage-amount">
-                    ¥{arbitrage.potentialProfit.toFixed(2)}
+                    ${(arbitrage.skin.averageSub * arbitrage.skin.price).toFixed(2)}
                   </Text>
                 </View>
               </View>
@@ -233,14 +266,14 @@ const Home = () => {
         <View className="announcements-section">
           <Text className="section-title-text">公告栏</Text>
           <View className="announcements-list">
-            {mockAnnouncements.map((announcement) => (
+            {indexData.announce.map((announcement:any) => (
               <View 
-                key={announcement.id}
+                key={announcement.timestamp}
                 className="announcement-item"
               >
                 <Text className="announcement-title">{announcement.title}</Text>
-                <Text className="announcement-content">{announcement.content}</Text>
-                <Text className="announcement-date">{announcement.date}</Text>
+                <Text className="announcement-content">{announcement.message}</Text>
+                <Text className="announcement-date">{(new Date(announcement.timestamp)).toLocaleString()}</Text>
               </View>
             ))}
           </View>

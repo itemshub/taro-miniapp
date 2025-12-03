@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { View, Input, ScrollView, Image, Picker } from '@tarojs/components';
 import Taro, { useReady } from '@tarojs/taro';
-import { mockSkins } from '../../data/mockData';
+import { mockSkins,mockCase } from '../../data/mockData';
 import { SkinItem } from '../../types';
 import './index.scss';
 
 const Market = () => {
-  const [skins, setSkins] = useState<SkinItem[]>(mockSkins);
+  const [skins, setSkins] = useState<any[]>(mockCase);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('全部');
   const [selectedRarity, setSelectedRarity] = useState('全部');
@@ -29,6 +29,7 @@ const Market = () => {
   const sortOptions = ['价格排序', '涨跌幅排序', '名称排序'];
 
   useReady(() => {
+    console.log(skins,skins.length)
     Taro.setNavigationBarTitle({
       title: '饰品市场',
     });
@@ -48,24 +49,24 @@ const Market = () => {
     rarity: string = selectedRarity,
     source: string = selectedSource
   ) => {
-    let filtered = [...mockSkins];
+    let filtered = [...mockCase];
 
     if (search) {
       const lowerSearch = search.toLowerCase();
       filtered = filtered.filter(
         (skin) =>
           skin.name.toLowerCase().includes(lowerSearch) ||
-          skin.skin.toLowerCase().includes(lowerSearch)
+          skin.id.toLowerCase().includes(lowerSearch)
       );
     }
 
-    if (category !== '全部') {
-      filtered = filtered.filter((skin) => skin.category === category);
-    }
+    // if (category !== '全部') {
+    //   filtered = filtered.filter((skin) => skin.category === category);
+    // }
 
-    if (rarity !== '全部') {
-      filtered = filtered.filter((skin) => skin.rarity === rarity);
-    }
+    // if (rarity !== '全部') {
+    //   filtered = filtered.filter((skin) => skin.rarity === rarity);
+    // }
 
     // 来源的筛选逻辑可按需要补充，此处保留原“实质内容不变”的前提
 
@@ -132,7 +133,7 @@ const Market = () => {
       {/* Header */}
       <View className="header">
         <View className="search-bar">
-          <View className="search-input-wrapper">
+          <View className="search-input-wrapper" >
             <View className="search-icon">
               <View className="icon-search" />
             </View>
@@ -143,22 +144,24 @@ const Market = () => {
               onInput={(e) => setSearchQuery(e.detail.value)}
               onConfirm={handleSearch}
               className="search-input"
+              // style={{width:"70%"}}
             />
           </View>
 
-          <View
+          {/* <View
             className="icon-button"
             onClick={() => setShowFilters(!showFilters)}
+            style={{width:"20%"}}
           >
-            <View className="icon-filter" />
-          </View>
+            筛选
+          </View> */}
 
-          <View
+          {/* <View
             className="icon-button"
             onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
           >
             <View className={viewMode === 'grid' ? 'icon-list' : 'icon-grid'} />
-          </View>
+          </View> */}
         </View>
 
         {/* Filter Panel */}
@@ -261,7 +264,7 @@ const Market = () => {
               >
                 <View className="item-image-wrapper">
                   <Image
-                    src={skin.image}
+                    src={skin.img_url}
                     className="item-image"
                     mode="aspectFill"
                   />
@@ -269,30 +272,30 @@ const Market = () => {
                     <View className="icon-star" />
                   </View>
                   <View className="quality-badge">
-                    <View className="quality-text">{skin.quality}</View>
+                    <View className="quality-text">{"quality"}</View>
                   </View>
                 </View>
 
                 <View className="item-content">
                   <View className="item-name">{skin.name}</View>
-                  <View className="item-skin">{skin.skin}</View>
+                  <View className="item-skin">{skin.id}</View>
                   <View className="item-footer">
                     <View className="item-price">
-                      ¥{skin.price.toFixed(2)}
+                      {/* ¥{skin.price.toFixed(2)} */}
                     </View>
                     <View
                       className={`item-change ${
-                        skin.change24h >= 0 ? 'positive' : 'negative'
+                        skin?.change24h >= 0 ? 'positive' : 'negative'
                       }`}
                     >
                       <View
                         className={
-                          skin.change24h >= 0
+                          skin?.change24h >= 0
                             ? 'icon-trending-up'
                             : 'icon-trending-down'
                         }
                       />
-                      {Math.abs(skin.change24h).toFixed(1)}%
+                      {Math.abs(skin?.change24h).toFixed(1)}%
                     </View>
                   </View>
                 </View>
@@ -308,34 +311,34 @@ const Market = () => {
                 className="list-item"
               >
                 <Image
-                  src={skin.image}
+                  src={skin.img_url}
                   className="list-item-image"
                   mode="aspectFill"
                 />
 
                 <View className="list-item-content">
                   <View className="list-item-name">{skin.name}</View>
-                  <View className="list-item-skin">{skin.skin}</View>
+                  <View className="list-item-skin">{skin.id}</View>
 
                   <View className="list-item-info">
                     <View className="list-item-price">
-                      ¥{skin.price.toFixed(2)}
+                      ¥{skin?.price.toFixed(2)}
                     </View>
                     <View
                       className={`list-item-change ${
-                        skin.change24h >= 0 ? 'positive' : 'negative'
+                        skin?.change24h >= 0 ? 'positive' : 'negative'
                       }`}
                     >
                       <View
                         className={
-                          skin.change24h >= 0
+                          skin?.change24h >= 0
                             ? 'icon-trending-up-small'
                             : 'icon-trending-down-small'
                         }
                       />
-                      {Math.abs(skin.change24h).toFixed(1)}%
+                      {Math.abs(skin?.change24h).toFixed(1)}%
                     </View>
-                    <View className="list-item-id">{skin.marketId}</View>
+                    <View className="list-item-id">{skin?.marketId}</View>
                   </View>
                 </View>
 
