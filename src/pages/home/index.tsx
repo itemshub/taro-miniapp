@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro';
 import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
 import { Search, TrendingUp, Package, Vault, Gamepad2, Bell, BarChart3 } from 'lucide-react';
 import { mockDashboardStats, mockCases, mockArbitrage, mockAnnouncements, mockCase, mockSkins } from '../../data/mockData';
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+// import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import './index.scss';
 import { api_case, api_index } from '@/utils/request';
 import { getSkinsById, getSkinsNameById } from '@/utils/utils';
@@ -65,6 +65,12 @@ const Home = () => {
 
   const handleQuickAction = (path: string) => {
     Taro.navigateTo({ url: path });
+  };
+
+  const handleSkinClick = (id: number) => {
+    Taro.navigateTo({
+      url: `/pages/skin-detail/index?id=${id}`,
+    });
   };
 
   const handleCaseClick = (id: number) => {
@@ -156,7 +162,7 @@ const Home = () => {
         </View>
 
         {/* Trend Chart */}
-        <View className="chart-card">
+        {/* <View className="chart-card">
           <Text className="chart-title">近7日收益趋势</Text>
           <View className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
@@ -178,7 +184,7 @@ const Home = () => {
               </LineChart>
             </ResponsiveContainer>
           </View>
-        </View>
+        </View> */}
 
         {/* Quick Actions */}
         {/* <View className="quick-actions-section">
@@ -210,7 +216,7 @@ const Home = () => {
               <View 
                 key={caseItem.id} 
                 className="case-item"
-                // onClick={() => handleCaseClick(caseItem.id)}
+                onClick={() => handleSkinClick(caseItem.id)}
               >
                 <Image 
                   src={caseItem.img_url} 
@@ -241,7 +247,7 @@ const Home = () => {
               <View 
                 key={arbitrage.skin.skin}
                 className="arbitrage-item"
-                // onClick={() => handleArbitrageClick(arbitrage.skin.id)}
+                onClick={() => handleArbitrageClick(arbitrage.skin.id)}
               >
                 <View className="arbitrage-header">
                   <Text className="arbitrage-name">{getSkinsNameById(cases,arbitrage.skin.skin) ? getSkinsNameById(cases,arbitrage.skin.skin).name : ""}</Text>

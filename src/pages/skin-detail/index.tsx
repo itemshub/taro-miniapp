@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { View, Text, ScrollView, Image, Button } from '@tarojs/components'
 import Taro, { useReady, useRouter } from '@tarojs/taro'
 import './index.scss'
+import { api_case, api_index } from '@/utils/request'
+import { getSkinsById } from '@/utils/utils'
 
 interface Skin {
   id: string
@@ -34,11 +36,53 @@ export default function SkinDetail() {
   const [skin, setSkin] = useState<Skin | null>(null)
   const [marketComparison, setMarketComparison] = useState<MarketComparison[]>([])
 
+  const [indexData, setIndexData] = useState<any>({});
+  const [cases, setCases] = useState<any>({});
+
+  const [targetSkin, setTargetSkin] = useState<any>({});
+
+  const [arbi, setArbi] = useState<any>({});
+  useEffect(() => {
+  const load = async () => {
+    try {
+      const data= await api_index()
+      setIndexData(data?.data);
+      console.log(data?.data)
+      const cs = await api_case();
+      setCases(cs?.data);
+
+      //Search target case 
+      for(let i of cs?.data)
+      {
+        if(i?.id == id?.toLocaleLowerCase())
+        {
+          const skinData = getSkinsById(data?.data.skins,(id as any));
+          i['data'] = skinData
+
+          let arb = {
+            to:skinData.data[skinData.data.length-1],
+            from : skinData.data[0],
+            sub: skinData.data[skinData.data.length-1].price - skinData.data[0].price,
+            averageSub:skinData.averageSub
+          }
+          setArbi(arb)
+          setTargetSkin(i);
+        }
+      }
+    } catch (err) {
+      console.error("请求失败:", err);
+    }
+  };
+
+  load();
+}, []);
+
+
   useReady(() => {
     Taro.setNavigationBarTitle({
       title: '饰品详情'
     })
-    loadSkinDetail()
+    // loadSkinDetail()
   })
 
   const loadSkinDetail = () => {
@@ -99,7 +143,7 @@ export default function SkinDetail() {
     })
   }
 
-  if (!skin) {
+  if(!targetSkin?.id){
     return (
       <View className='skin-detail-page'>
         <View className='error-container'>
@@ -112,25 +156,35 @@ export default function SkinDetail() {
 
   const getChangeColor = (change: number) => change >= 0 ? 'positive' : 'negative'
 
+  if(!targetSkin?.id)
+  {
+    return (
+      <View></View>
+    )
+  }
+  
+
   return (
     <ScrollView className='skin-detail-page' scrollY>
       {/* Skin Image and Basic Info */}
       <View className='skin-info-card'>
         <View className='skin-image-container'>
           <Image 
-            src={skin.image} 
+            src={targetSkin.img_url} 
             className='skin-image'
             mode='aspectFit'
           />
           <View className='quality-badge'>
-            <Text className='quality-text'>{skin.quality}</Text>
+            <Text className='quality-text'>
+              {targetSkin.data.data.length} Markets
+            </Text>
           </View>
         </View>
         
-        <Text className='skin-name'>{skin.name}</Text>
-        <Text className='skin-type'>{skin.skin}</Text>
+        <Text className='skin-name'>{targetSkin.name}</Text>
+        <Text className='skin-type'>{targetSkin.id}</Text>
         
-        <View className='skin-meta'>
+        {/* <View className='skin-meta'>
           <View className='meta-item'>
             <Text className='meta-label'>稀有度</Text>
             <Text className='meta-value'>{skin.rarity}</Text>
@@ -139,17 +193,17 @@ export default function SkinDetail() {
             <Text className='meta-label'>系列</Text>
             <Text className='meta-value'>{skin.collection}</Text>
           </View>
-        </View>
+        </View> */}
         
         <View className='price-info'>
           <View className='price-item'>
             <Text className='price-label'>当前价格</Text>
-            <Text className='price-value'>¥{skin.price.toFixed(2)}</Text>
+            <Text className='price-value'>${targetSkin.data.price.toFixed(2)}</Text>
           </View>
           <View className='price-item'>
-            <Text className='price-label'>24小时涨跌</Text>
-            <Text className={`change-value ${getChangeColor(skin.change24h)}`}>
-              {skin.change24h >= 0 ? '+' : ''}{Math.abs(skin.change24h).toFixed(1)}%
+            <Text className='price-label'>可套利差</Text>
+            <Text className={`change-value ${getChangeColor(1)}`}>
+              ±{Math.abs(targetSkin.data.averageSub*100).toFixed(2)}%
             </Text>
           </View>
         </View>
@@ -160,22 +214,22 @@ export default function SkinDetail() {
         <Text className='section-title'>市场对比</Text>
         
         <View className='market-list'>
-          {marketComparison.map((market, index) => (
+          {targetSkin.data.data.map((market:any, index:any) => (
             <View key={index} className='market-item'>
               <View className='market-info'>
-                <Text className='market-name'>{market.platform}</Text>
-                <Text className='market-volume'>交易量: {market.volume}</Text>
+                <Text className='market-name'>{market.name}</Text>
+                <Text className='market-volume'>挂单量: {market.active_offers}</Text>
               </View>
               <View className='market-price-info'>
-                <Text className='market-price'>¥{market.price.toFixed(2)}</Text>
-                <Text className={`market-change ${getChangeColor(market.change)}`}>
-                  {market.change >= 0 ? '+' : ''}{market.change.toFixed(1)}%
+                <Text className='market-price'>${market.price.toFixed(2)}</Text>
+                <Text className={`market-change ${getChangeColor(market.price-targetSkin.data.price)}`}>
+                  {market.change >= targetSkin.data.price ? '+' : ''}{((market.price-targetSkin.data.price)*100 / market.price).toFixed(1)}%
                 </Text>
               </View>
               <Button 
                 className='link-button' 
                 size='mini'
-                onClick={() => handleExternalLink(market.platform)}
+                onClick={() => handleExternalLink(market.market_url)}
               >
                 跳转
               </Button>
@@ -194,19 +248,19 @@ export default function SkinDetail() {
           <View className='arbitrage-platforms'>
             <View className='arbitrage-item'>
               <Text className='arbitrage-label'>最优买入</Text>
-              <Text className='arbitrage-buy'>C5游戏 - ¥{(skin.price * 0.98).toFixed(2)}</Text>
+              <Text className='arbitrage-buy'>{arbi.from.name} - ${(arbi.from.price).toFixed(2)}</Text>
             </View>
             <View className='arbitrage-item'>
               <Text className='arbitrage-label'>最优卖出</Text>
-              <Text className='arbitrage-sell'>Buff163 - ¥{skin.price.toFixed(2)}</Text>
+              <Text className='arbitrage-sell'>{arbi.to.name} - ${arbi.to.price.toFixed(2)}</Text>
             </View>
           </View>
           
           <View className='arbitrage-profit'>
             <Text className='profit-label'>套利空间</Text>
             <View className='profit-values'>
-              <Text className='profit-rate'>+2.04%</Text>
-              <Text className='profit-amount'>¥{(skin.price * 0.02).toFixed(2)}</Text>
+              <Text className='profit-rate'>+{(arbi.averageSub*100).toFixed(2)}%</Text>
+              <Text className='profit-amount'>${(arbi.sub).toFixed(2)}</Text>
             </View>
           </View>
           
@@ -217,7 +271,7 @@ export default function SkinDetail() {
       </View>
 
       {/* Skin Stats */}
-      {skin.stats && (
+      {/* {skin.stats && (
         <View className='section'>
           <Text className='section-title'>皮肤详情</Text>
           <View className='stats-card'>
@@ -237,23 +291,23 @@ export default function SkinDetail() {
             </Button>
           </View>
         </View>
-      )}
+      )} */}
 
       {/* Description */}
-      {skin.description && (
+      {/* {skin.description && (
         <View className='section'>
           <Text className='section-title'>描述</Text>
           <View className='description-card'>
             <Text className='description-text'>{skin.description}</Text>
           </View>
         </View>
-      )}
+      )} */}
 
       {/* Quick Actions */}
       <View className='actions'>
-        <Button className='action-button primary' onClick={handleToggleFavorite}>
+        {/* <Button className='action-button primary' onClick={handleToggleFavorite}>
           {isFavorited ? '取消关注' : '加入关注'}
-        </Button>
+        </Button> */}
         <Button className='action-button secondary'>
           分享饰品
         </Button>

@@ -288,7 +288,7 @@ const Market = () => {
             {cases.map((skin:any) => (
               <View
                 key={skin.id}
-                // onClick={() => handleSkinClick(skin.id)}
+                onClick={() => handleSkinClick(skin.id)}
                 className="grid-item"
               >
                 <View className="item-image-wrapper">
@@ -297,12 +297,12 @@ const Market = () => {
                     className="item-image"
                     mode="aspectFill"
                   />
-                  <View className="favorite-button">
+                  {/* <View className="favorite-button">
                     <View className="icon-star" />
                   </View>
                   <View className="quality-badge">
                     <View className="quality-text">{"quality"}</View>
-                  </View>
+                  </View> */}
                 </View>
 
                 <View className="item-content">
