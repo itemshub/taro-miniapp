@@ -1,3 +1,50 @@
+// RFC 4648 Base32 算法（纯 JavaScript 实现）
+// 兼容 Taro 小程序（weapp/tt/h5 全平台）
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+export function base32Encode(input: string): string {
+  let bits = '';
+  let encoded = '';
+
+  for (let i = 0; i < input.length; i++) {
+    const bin = input.charCodeAt(i).toString(2).padStart(8, '0');
+    bits += bin;
+  }
+
+  for (let i = 0; i < bits.length; i += 5) {
+    const chunk = bits.substring(i, i + 5);
+    if (chunk.length < 5) {
+      encoded += alphabet[parseInt(chunk.padEnd(5, '0'), 2)];
+    } else {
+      encoded += alphabet[parseInt(chunk, 2)];
+    }
+  }
+
+  return encoded;
+}
+
+export function base32Decode(input: string): string {
+  let bits = '';
+  let decoded = '';
+
+  for (let i = 0; i < input.length; i++) {
+    const idx = alphabet.indexOf(input[i]);
+    bits += idx.toString(2).padStart(5, '0');
+  }
+
+  for (let i = 0; i < bits.length; i += 8) {
+    const byte = bits.substring(i, i + 8);
+    if (byte.length === 8) {
+      decoded += String.fromCharCode(parseInt(byte, 2));
+    }
+  }
+
+  return decoded;
+}
+
+
+
 export const getSkinsById = (skins:any,id:string)=>
 {
     for(let i of skins)
@@ -32,60 +79,6 @@ export const getMarketsByName = (markets:any,id:string)=>
     }
     return false;
 }
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-
-export const base32Encode = (input: string) => {
-  let buffer = new TextEncoder().encode(input);
-  let output = '';
-  let i = 0;
-
-  while (i < buffer.length) {
-    let bytes = buffer.slice(i, i + 5);
-
-    // 5 bytes = 40 bits → 8 groups of 5 bits = 8 chars
-    let bits = 0;
-    let value = 0;
-
-    for (let b of bytes) {
-      value = (value << 8) | b;
-      bits += 8;
-      while (bits >= 5) {
-        output += ALPHABET[(value >>> (bits - 5)) & 31];
-        bits -= 5;
-      }
-    }
-
-    if (bits > 0) {
-      output += ALPHABET[(value << (5 - bits)) & 31];
-    }
-
-    i += 5;
-  }
-
-  return output;
-};
-
-export const base32Decode = (input: string) => {
-  let cleaned = input.replace(/=+$/, '');
-  let buffer = [];
-  let bits = 0;
-  let value = 0;
-
-  for (let char of cleaned) {
-    let index = ALPHABET.indexOf(char);
-    if (index === -1) continue;
-
-    value = (value << 5) | index;
-    bits += 5;
-
-    if (bits >= 8) {
-      buffer.push((value >> (bits - 8)) & 255);
-      bits -= 8;
-    }
-  }
-
-  return new TextDecoder().decode(new Uint8Array(buffer));
-};
 
 export const getTimeDiffText = (time: string | number) => {
   const last = new Date(time).getTime();
