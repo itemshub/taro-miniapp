@@ -2,6 +2,7 @@ export default defineAppConfig({
   pages: [
     'pages/home/index',
     'pages/market/index',
+    'pages/market-list/index',
     'pages/arbitrage/index',
     'pages/vault/index',
     'pages/profile/index',
@@ -34,6 +35,12 @@ export default defineAppConfig({
         iconPath: 'assets/icons/trending-up.png',
         selectedIconPath: 'assets/icons/trending-up-white.png',
         text: '市场'
+      },
+      {
+        pagePath: 'pages/market-list/index',
+        iconPath: 'assets/icons/chart-candlestick.png',
+        selectedIconPath: 'assets/icons/chart-candlestick-white.png',
+        text: '平台'
       },
       {
         pagePath: 'pages/arbitrage/index',
