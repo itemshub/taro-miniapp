@@ -1,3 +1,4 @@
+@import '../../styles/variables.scss';
 .arbitrage-page {
   width: 100%;         /* ← 必须加的 */
   max-width: 100%;     /* ← 防止被内部元素撑开 */
@@ -42,8 +43,8 @@
 }
 
 .header-title {
-  font-size: 34rpx;
-  font-weight: 700;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
 }
 
 .calculator-btn {
@@ -114,12 +115,12 @@
 }
 
 /* Stats */
-.stats {
+.stat {
   background-color: #1f2937;
   padding: 24rpx;
 }
 
-.stats-grid {
+.stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24rpx;
@@ -547,4 +548,31 @@
 
 .text-red {
   color: #f87171;
+}
+
+.loading-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111827; // 可改
+}
+
+.loading-spinner {
+  width: 80rpx;
+  height: 80rpx;
+  border: 8rpx solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

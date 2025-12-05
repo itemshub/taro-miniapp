@@ -13,20 +13,20 @@ const Home = () => {
   const [indexData, setIndexData] = useState<any>({});
   const [cases, setCases] = useState<any>(mockSkins);
   useEffect(() => {
-  const load = async () => {
-    try {
-      const data= await api_index()
-      setIndexData(data?.data);
-      console.log(data?.data)
-      const cs = await api_case();
-      setCases(cs?.data);
-    } catch (err) {
-      console.error("请求失败:", err);
-    }
-  };
+    const load = async () => {
+      try {
+        const data= await api_index()
+        setIndexData(data?.data);
+        console.log(data?.data)
+        const cs = await api_case();
+        setCases(cs?.data);
+      } catch (err) {
+        console.error("请求失败:", err);
+      }
+    };
 
-  load();
-}, []);
+    load();
+  }, []);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -89,12 +89,14 @@ const Home = () => {
   };
 
 
-  if(!indexData?.skins)
-  {
-    return (
-      <View></View>
-    )
-  }
+if (!indexData?.skins) {
+  return (
+    <View className='loading-wrapper'>
+      <View className='loading-spinner'></View>
+    </View>
+  );
+}
+
 
   return (
     <ScrollView scrollY className="home-container">

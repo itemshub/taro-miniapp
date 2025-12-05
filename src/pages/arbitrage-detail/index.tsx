@@ -216,16 +216,6 @@ export default function ArbitrageDetail() {
     }
 
     return 'medium'
-    // switch (risk) {
-    //   case 'Low':
-    //     return 'low'
-    //   case 'Medium':
-    //     return 'medium'
-    //   case 'High':
-    //     return 'high'
-    //   default:
-    //     return 'low'
-    // }
   }
 
   return (
