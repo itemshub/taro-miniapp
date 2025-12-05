@@ -93,6 +93,10 @@ npm run build:weapp   # 微信小程序
 npm run build:rn      # React Native
 ```
 
+## ICON STYLE
+
+#a3a3a3
+
 ## 许可证
 
 MIT License

@@ -42,13 +42,13 @@ export default function Arbitrage() {
 
   const profitRanges = [
     '全部',
-    '1%+',
-    '2%+',
-    '5%+',
-    '10%+'
+    '10%+',
+    '20%+',
+    '50%+',
+    '100%+'
   ]
 
-  const getRiskLevelColor = (arbi) => {
+  const getRiskLevelColor = (arbi:any) => {
     if(arbi.from.active_offers >10000 && arbi.to.active_offers > 10000)
     {
       return 'low'
@@ -167,7 +167,12 @@ export default function Arbitrage() {
           </View>
         ) : (
           <View className="arbitrage-list" style={{maxWidth:"95%"}}>
-            {arbi.map((arbitrage:any) => (
+            {(selectedProfitRange == "全部" ? arbi : arbi.filter((item:any) => 
+            (item.to.price - item.from.price)*100 / item.from.price
+            >= 
+            Number(selectedProfitRange.split("%")[0])
+          )
+          ).map((arbitrage:any) => (
               <View 
                 key={base32Encode(`${arbitrage.skin.skin}#${arbitrage.from.name}#${arbitrage.to.name}`)}
                 onClick={() => handleNavigate(base32Encode(`${arbitrage.skin.skin}#${arbitrage.from.name}#${arbitrage.to.name}`))}
