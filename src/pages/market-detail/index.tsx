@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { View, Text, ScrollView, Image, Button } from '@tarojs/components'
 import Taro, { useReady, useRouter } from '@tarojs/taro'
 import './index.scss'
+import { api_case, api_index } from '@/utils/request'
+import { getSkinsById, getSkinsNameById } from '@/utils/utils'
 
 interface MarketInfo {
   name: string
@@ -27,6 +29,34 @@ export default function MarketDetail() {
   const [marketData, setMarketData] = useState<MarketInfo | null>(null)
   const [marketSkins, setMarketSkins] = useState<SkinItem[]>([])
 
+  const [indexData, setIndexData] = useState<any>({});
+  const [cases, setCases] = useState<any>([]);
+
+  const [market, setMarket] = useState<any>({});
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data= await api_index()
+        setIndexData(data?.data);
+        console.log(data?.data.skins)
+        const cs = await api_case();
+        setCases(cs?.data);
+
+        for(let i of data.data.markets)
+        {
+          // console.log(i)
+          if(i.name.toLocaleLowerCase() == id?.toLocaleLowerCase())
+          {
+            setMarket(i);
+          }
+        }
+      } catch (err) {
+        console.error("请求失败:", err);
+      }
+    };
+
+    load();
+  }, []);
   useReady(() => {
     Taro.setNavigationBarTitle({
       title: '市场详情'
@@ -146,7 +176,7 @@ export default function MarketDetail() {
   const handleVisitWebsite = () => {
     Taro.showModal({
       title: '提示',
-      content: `即将跳转到${marketData?.name}官网`,
+      content: `即将跳转到${market?.name}官网`,
       confirmText: '确定',
       cancelText: '取消'
     })
@@ -163,30 +193,46 @@ export default function MarketDetail() {
     return <View className='market-detail-page'>加载中...</View>
   }
 
+  if (!market?.name) {
+    return (
+      <View className='arbitrage-detail-page'>
+        <View className='error-container'>
+          <Text className='error-text'>市场不存在</Text>
+          <Button className='error-button' onClick={handleBack}>返回</Button>
+        </View>
+      </View>
+    )
+  }
+
   return (
     <ScrollView className='market-detail-page' scrollY>
       {/* Market Info */}
       <View className={`market-info-card ${marketData.bgColor}`}>
         <View className='market-icon-container'>
           <View className={`market-icon ${marketData.color}`}>
-            <Text className='icon-text'>🔗</Text>
+          <Image 
+            src={market.img_url} 
+            // className='skin-image'
+            mode='aspectFit'
+          />
           </View>
         </View>
-        <Text className={`market-name ${marketData.color}`}>{marketData.name}</Text>
-        <Text className='market-subtitle'>专业游戏交易平台</Text>
+        <Text className={`market-name ${marketData.color}`}>{market.name}</Text>
+        <Text className='market-subtitle'>注册地 : {market.headquarters}</Text>
+        <Text className='market-subtitle'>成立于 : {market.founded}</Text>
         
         <View className='market-meta'>
           <View className='meta-item'>
             <Text className='meta-label'>手续费</Text>
-            <Text className='meta-value'>{marketData.fee}</Text>
+            <Text className='meta-value'>{market.seller_fee}</Text>
           </View>
           <View className='meta-item'>
             <Text className='meta-label'>货币</Text>
-            <Text className='meta-value'>{marketData.currency}</Text>
+            <Text className='meta-value'>USD</Text>
           </View>
         </View>
         
-        <View className='features-section'>
+        {/* <View className='features-section'>
           <Text className='features-title'>平台特色</Text>
           <View className='features-list'>
             {marketData.features.map((feature, index) => (
@@ -196,7 +242,7 @@ export default function MarketDetail() {
               </View>
             ))}
           </View>
-        </View>
+        </View> */}
       </View>
 
       {/* Market Stats */}
@@ -204,14 +250,14 @@ export default function MarketDetail() {
         <Text className='section-title'>市场数据</Text>
         <View className='stats-grid'>
           <View className='stat-card'>
-            <Text className='stat-label'>今日交易量</Text>
-            <Text className='stat-value'>¥123,456</Text>
-            <Text className='stat-trend positive'>+15.2%</Text>
+            <Text className='stat-label'>本月访客</Text>
+            <Text className='stat-value'>{market.monthly_visits}</Text>
+            <Text className='stat-trend positive'>挂单 : {market.offers}</Text>
           </View>
           <View className='stat-card'>
-            <Text className='stat-label'>活跃用户</Text>
-            <Text className='stat-value'>8,592</Text>
-            <Text className='stat-trend info'>实时更新</Text>
+            <Text className='stat-label'>市场价值</Text>
+            <Text className='stat-value'>{market.value}$</Text>
+            <Text className='stat-trend info'>平均折扣 : {market.avg_discount}%</Text>
           </View>
         </View>
       </View>
@@ -220,14 +266,14 @@ export default function MarketDetail() {
       <View className='section'>
         <Text className='section-title'>热门商品</Text>
         <View className='skin-list'>
-          {marketSkins.map((skin) => (
+          {indexData.skins.map((skin:any) => (
             <View 
-              key={skin.id}
+              key={skin.skin}
               className='skin-item'
-              onClick={() => handleNavigateToSkin(skin.id)}
+              onClick={() => handleNavigateToSkin(skin.skin)}
             >
               <Image 
-                src={skin.image} 
+                src={(getSkinsNameById(cases,skin.skin) ? getSkinsNameById(cases,skin.skin).img_url : ""  )}
                 className='skin-image'
                 mode='aspectFit'
               />
@@ -235,9 +281,9 @@ export default function MarketDetail() {
                 <Text className='skin-name'>{skin.name}</Text>
                 <Text className='skin-type'>{skin.skin}</Text>
                 <View className='skin-price-row'>
-                  <Text className='skin-price'>¥{skin.price.toFixed(2)}</Text>
-                  <Text className={`skin-change ${skin.change24h >= 0 ? 'positive' : 'negative'}`}>
-                    {skin.change24h >= 0 ? '+' : ''}{Math.abs(skin.change24h).toFixed(1)}%
+                  <Text className='skin-price'>${(skin.price).toFixed(2)}</Text>
+                  <Text className={`skin-change positive`}>
+                   ± {(skin.averageSub).toFixed(2)}%
                   </Text>
                 </View>
               </View>
@@ -250,7 +296,7 @@ export default function MarketDetail() {
       </View>
 
       {/* Price Comparison */}
-      <View className='section'>
+      {/* <View className='section'>
         <Text className='section-title'>平台价格对比</Text>
         <View className='comparison-card'>
           <Text className='comparison-subtitle'>以 AK-47 Fire Serpent 为例</Text>
@@ -280,16 +326,16 @@ export default function MarketDetail() {
             ))}
           </View>
         </View>
-      </View>
+      </View> */}
 
       {/* Actions */}
       <View className='actions'>
         <Button className='action-button primary' onClick={handleVisitWebsite}>
           访问官网
         </Button>
-        <Button className='action-button secondary' onClick={handleViewApiDoc}>
+        {/* <Button className='action-button secondary' onClick={handleViewApiDoc}>
           API文档
-        </Button>
+        </Button> */}
       </View>
     </ScrollView>
   )

@@ -6,7 +6,7 @@ import { mockDashboardStats, mockCases, mockArbitrage, mockAnnouncements, mockCa
 // import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import './index.scss';
 import { api_case, api_index } from '@/utils/request';
-import { getSkinsById, getSkinsNameById } from '@/utils/utils';
+import { base32Encode, getSkinsById, getSkinsNameById, getTimeDiffText } from '@/utils/utils';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -73,11 +73,11 @@ const Home = () => {
     });
   };
 
-  const handleCaseClick = (id: number) => {
+  const handleMarketClick = (id: number) => {
     Taro.navigateTo({ url: `/pages/market-detail/index?id=${id}` });
   };
 
-  const handleArbitrageClick = (id: number) => {
+  const handleArbitrageClick = (id: string) => {
     Taro.navigateTo({ url: `/pages/arbitrage-detail/index?id=${id}` });
   };
 
@@ -156,9 +156,15 @@ const Home = () => {
 
           <View className="stat-card">
             <Text className="stat-label">上次更新</Text>
-            <Text className="stat-value">{(new Date(indexData.lastUpdateTime)).toLocaleString()}</Text>
+
+            {/* 时间差文本 */}
+            <Text className="stat-value">
+              {getTimeDiffText(indexData.lastUpdateTime)}
+            </Text>
+
             <Text className="stat-change positive">· Online</Text>
           </View>
+
         </View>
 
         {/* Trend Chart */}
@@ -247,7 +253,7 @@ const Home = () => {
               <View 
                 key={arbitrage.skin.skin}
                 className="arbitrage-item"
-                onClick={() => handleArbitrageClick(arbitrage.skin.id)}
+                onClick={() => handleArbitrageClick(base32Encode(`${arbitrage.skin.skin}#${arbitrage.from.name}#${arbitrage.to.name}`))}
               >
                 <View className="arbitrage-header">
                   <Text className="arbitrage-name">{getSkinsNameById(cases,arbitrage.skin.skin) ? getSkinsNameById(cases,arbitrage.skin.skin).name : ""}</Text>
