@@ -188,21 +188,30 @@ export default function MarketDetail() {
       icon: 'none'
     })
   }
-
+    
   if (!marketData) {
     return <View className='market-detail-page'>加载中...</View>
   }
 
-  if (!market?.name) {
+  // if (!market?.name) {
+  //   return (
+  //     <View className='arbitrage-detail-page'>
+  //       <View className='error-container'>
+  //         <Text className='error-text'>市场不存在</Text>
+  //         <Button className='error-button' onClick={handleBack}>返回</Button>
+  //       </View>
+  //     </View>
+  //   )
+  // }
+
+  if(!market?.name){
     return (
-      <View className='arbitrage-detail-page'>
-        <View className='error-container'>
-          <Text className='error-text'>市场不存在</Text>
-          <Button className='error-button' onClick={handleBack}>返回</Button>
-        </View>
+      <View className='loading-wrapper'>
+        <View className='loading-spinner'></View>
       </View>
-    )
+    );
   }
+  
 
   return (
     <ScrollView className='market-detail-page' scrollY>

@@ -184,16 +184,26 @@ export default function ArbitrageDetail() {
   //   )
   // }
 
-  if (!arbi?.from) {
+  // if (!arbi?.from) {
+  //   return (
+  //     <View className='arbitrage-detail-page'>
+  //       <View className='error-container'>
+  //         <Text className='error-text'>套利机会不存在</Text>
+  //         <Button className='error-button' onClick={handleBack}>返回套利</Button>
+  //       </View>
+  //     </View>
+  //   )
+  // }
+
+
+  if(!arbi?.from){
     return (
-      <View className='arbitrage-detail-page'>
-        <View className='error-container'>
-          <Text className='error-text'>套利机会不存在</Text>
-          <Button className='error-button' onClick={handleBack}>返回套利</Button>
-        </View>
+      <View className='loading-wrapper'>
+        <View className='loading-spinner'></View>
       </View>
-    )
+    );
   }
+  
   const buyTotal = arbi.from.price * customQuantity
   const sellTotal = arbi.to.price * customQuantity
   const buyFeeRate = Number(arbi.from.info.seller_fee.split("%")[0])/100

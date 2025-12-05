@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image, Button } from '@tarojs/components'
 import Taro, { useReady, useRouter } from '@tarojs/taro'
 import './index.scss'
 import { api_case, api_index } from '@/utils/request'
-import { getSkinsById } from '@/utils/utils'
+import { base32Encode, getSkinsById } from '@/utils/utils'
 
 interface Skin {
   id: string
@@ -77,6 +77,9 @@ export default function SkinDetail() {
   load();
 }, []);
 
+  const handleArbitrageClick = (id: string) => {
+    Taro.navigateTo({ url: `/pages/arbitrage-detail/index?id=${id}` });
+  };
 
   useReady(() => {
     Taro.setNavigationBarTitle({
@@ -143,17 +146,24 @@ export default function SkinDetail() {
     })
   }
 
+  // if(!targetSkin?.id){
+  //   return (
+  //     <View className='skin-detail-page'>
+  //       <View className='error-container'>
+  //         <Text className='error-text'>饰品不存在</Text>
+  //         <Button className='error-button' onClick={handleBack}>返回市场</Button>
+  //       </View>
+  //     </View>
+  //   )
+  // }
   if(!targetSkin?.id){
     return (
-      <View className='skin-detail-page'>
-        <View className='error-container'>
-          <Text className='error-text'>饰品不存在</Text>
-          <Button className='error-button' onClick={handleBack}>返回市场</Button>
-        </View>
+      <View className='loading-wrapper'>
+        <View className='loading-spinner'></View>
       </View>
-    )
+    );
   }
-
+  
   const getChangeColor = (change: number) => change >= 0 ? 'positive' : 'negative'
 
   if(!targetSkin?.id)
@@ -264,7 +274,7 @@ export default function SkinDetail() {
             </View>
           </View>
           
-          <Button className='arbitrage-button' onClick={handleViewArbitrage}>
+          <Button className='arbitrage-button'  onClick={() => handleArbitrageClick(base32Encode(`${targetSkin.id}#${arbi.from.name}#${arbi.to.name}`))}>
             查看套利详情
           </Button>
         </View>
@@ -308,9 +318,9 @@ export default function SkinDetail() {
         {/* <Button className='action-button primary' onClick={handleToggleFavorite}>
           {isFavorited ? '取消关注' : '加入关注'}
         </Button> */}
-        <Button className='action-button secondary'>
+        {/* <Button className='action-button secondary'>
           分享饰品
-        </Button>
+        </Button> */}
       </View>
     </ScrollView>
   )
