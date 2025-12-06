@@ -295,13 +295,13 @@ export default function ArbitrageDetail() {
               </Text>
             </View>
             <View className='profit-item'>
-              <Text className='profit-label'>套利率</Text>
+              <Text className='profit-label'>有效价差</Text>
               <Text className='profit-value green'>
                 +{((arbi.to.price - arbi.from.price)*100/arbi.from.price).toFixed(2)}%
               </Text>
             </View>
             <View className='profit-item'>
-              <Text className='profit-label'>预估收益</Text>
+              <Text className='profit-label'>预估差额</Text>
               <Text className='profit-value blue'>
                 ${(arbi.to.price - arbi.from.price).toFixed(2)}
               </Text>
@@ -362,7 +362,7 @@ export default function ArbitrageDetail() {
 
 
         <View className='last-updated'>
-           <Button className='error-button' onClick={handleShowCalculator}>收益计算器</Button>
+           <Button className='error-button' onClick={handleShowCalculator}>价差计算器</Button>
         </View>
 
         {/* Last Updated */}
@@ -385,7 +385,7 @@ export default function ArbitrageDetail() {
         <View className='modal-overlay' onClick={handleHideCalculator}>
           <View className='modal-content' onClick={(e) => e.stopPropagation()}>
             <View className='modal-header'>
-              <Text className='modal-title'>收益计算器</Text>
+              <Text className='modal-title'>价差计算器</Text>
               <Button className='modal-close' onClick={handleHideCalculator}>×</Button>
             </View>
             
@@ -447,13 +447,13 @@ export default function ArbitrageDetail() {
               </View>
               
               <View className='calc-section profit'>
-                <Text className='calc-title profit-title'>净收益</Text>
+                <Text className='calc-title profit-title'>净差值</Text>
                 <View className='calc-row'>
-                  <Text className='calc-label'>净收益金额：</Text>
+                  <Text className='calc-label'>净差值金额：</Text>
                   <Text className='calc-value profit-value'>${netProfit.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row'>
-                  <Text className='calc-label'>净收益率：</Text>
+                  <Text className='calc-label'>净价差比率：</Text>
                   <Text className='calc-value profit-value'>{netProfitPercentage.toFixed(2)}%</Text>
                 </View>
               </View>

@@ -123,7 +123,7 @@ export default function Arbitrage() {
           {/* Filters */}
           <View className="filters">
             <View className="filter-section">
-              <Text className="filter-label">收益率</Text>
+              <Text className="filter-label">有效价差</Text>
               <View className="filter-options">
                 {profitRanges.map((range) => (
                   <View
@@ -148,7 +148,7 @@ export default function Arbitrage() {
             <Text className="stat-value">{indexData.greatProfit}</Text>
           </View>
           <View className="stat-item">
-            <Text className="stat-label">平均收益</Text>
+            <Text className="stat-label">平均价差</Text>
             <Text className="stat-value stat-value-green">±{(indexData.skinsAverageSub*100).toFixed(2)}%</Text>
           </View>
           <View className="stat-item">
