@@ -132,7 +132,7 @@ export default function SkinDetail() {
 
   const handleViewArbitrage = () => {
     Taro.showToast({
-      title: '跳转套利详情',
+      title: '跳转比价详情',
       icon: 'none'
     })
   }
@@ -211,7 +211,7 @@ export default function SkinDetail() {
             <Text className='price-value'>${targetSkin.data.price.toFixed(2)}</Text>
           </View>
           <View className='price-item'>
-            <Text className='price-label'>可套利差</Text>
+            <Text className='price-label'>有效价差</Text>
             <Text className={`change-value ${getChangeColor(1)}`}>
               ±{Math.abs(targetSkin.data.averageSub*100).toFixed(2)}%
             </Text>
@@ -250,10 +250,10 @@ export default function SkinDetail() {
 
       {/* Arbitrage Opportunity */}
       <View className='section'>
-        <Text className='section-title'>套利机会</Text>
+        <Text className='section-title'>比价空间</Text>
         
         <View className='arbitrage-card'>
-          <Text className='arbitrage-status'>可套利</Text>
+          <Text className='arbitrage-status'>有效价差</Text>
           
           <View className='arbitrage-platforms'>
             <View className='arbitrage-item'>
@@ -267,7 +267,7 @@ export default function SkinDetail() {
           </View>
           
           <View className='arbitrage-profit'>
-            <Text className='profit-label'>套利空间</Text>
+            <Text className='profit-label'>价差</Text>
             <View className='profit-values'>
               <Text className='profit-rate'>+{(arbi.averageSub*100).toFixed(2)}%</Text>
               <Text className='profit-amount'>${(arbi.sub).toFixed(2)}</Text>
@@ -275,7 +275,7 @@ export default function SkinDetail() {
           </View>
           
           <Button className='arbitrage-button'  onClick={() => handleArbitrageClick(base32Encode(`${targetSkin.id}#${arbi.from.name}#${arbi.to.name}`))}>
-            查看套利详情
+            查看比价详情
           </Button>
         </View>
       </View>

@@ -14,7 +14,7 @@ export default defineAppConfig({
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#111827',
-    navigationBarTitleText: '饰集CS套利',
+    navigationBarTitleText: '饰集CS比价',
     navigationBarTextStyle: 'white',
     backgroundColor: '#111827'
   },
@@ -46,7 +46,7 @@ export default defineAppConfig({
         pagePath: 'pages/arbitrage/index',
         iconPath: 'assets/icons/graduation-cap.png',
         selectedIconPath: 'assets/icons/graduation-cap-white.png',
-        text: '套利'
+        text: '比价'
       }
       // {
       //   pagePath: 'pages/vault/index',

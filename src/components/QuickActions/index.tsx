@@ -16,8 +16,8 @@ const defaultActions: QuickActionItem[] = [
   },
   {
     id: 'arbitrage',
-    title: '套利机会',
-    description: '发现套利空间',
+    title: '比价机会',
+    description: '比价空间',
     icon: '💰',
     url: '/pages/arbitrage/index',
     color: '#7ED321',

@@ -117,7 +117,7 @@ export default function ArbitrageDetail() {
 
   useReady(() => {
     Taro.setNavigationBarTitle({
-      title: '套利详情'
+      title: '比价详情'
     })
     // loadArbitrageData()
   })

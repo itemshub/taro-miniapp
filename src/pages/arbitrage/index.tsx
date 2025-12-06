@@ -111,7 +111,7 @@ export default function Arbitrage() {
           <View className="header-title-row">
             <View className="header-title-wrapper">
               <Text className="header-icon">⇄</Text>
-              <Text className="header-title">套利机会</Text>
+              <Text className="header-title">价差</Text>
             </View>
             <View 
               className="calculator-btn"
@@ -163,7 +163,7 @@ export default function Arbitrage() {
         {arbi.length === 0 ? (
           <View className="empty-state">
             <Text className="empty-icon">⚠️</Text>
-            <Text className="empty-text">暂无可用套利机会</Text>
+            <Text className="empty-text">暂无有效价差</Text>
           </View>
         ) : (
           <View className="arbitrage-list" style={{maxWidth:"95%"}}>
@@ -221,7 +221,7 @@ export default function Arbitrage() {
                   
                   <View className="profit-row">
                     <View className="profit-info">
-                      <Text className="profit-label">套利空间</Text>
+                      <Text className="profit-label">价差空间</Text>
                       <View className="profit-values">
                         <Text className="profit-percentage">
                           +{((arbitrage.to.price - arbitrage.from.price)*100 / arbitrage.from.price).toFixed(2)}%

@@ -36,33 +36,6 @@ const Home = () => {
     }
   };
 
-  const quickActions = [
-    {
-      icon: TrendingUp,
-      label: '查看市场',
-      path: '/pages/market/index',
-      color: 'blue'
-    },
-    {
-      icon: Package,
-      label: '套利机会',
-      path: '/pages/arbitrage/index',
-      color: 'green'
-    },
-    {
-      icon: Vault,
-      label: '质押收益',
-      path: '/pages/vault/index',
-      color: 'purple'
-    },
-    {
-      icon: Gamepad2,
-      label: '绑定Steam',
-      path: '/pages/profile/index',
-      color: 'orange'
-    }
-  ];
-
   const handleQuickAction = (path: string) => {
     Taro.navigateTo({ url: path });
   };
@@ -124,7 +97,7 @@ if (!indexData?.skins) {
         {/* Welcome Message */}
         <View className="welcome-section">
           <Text className="title">ITEMSHUB</Text>
-          <Text className="subtitle">专业的CS2饰品套利平台</Text>
+          <Text className="subtitle">专业的CS2饰品比价平台</Text>
         </View>
       </View>
 
@@ -145,14 +118,14 @@ if (!indexData?.skins) {
           </View>
           
           <View className="stat-card">
-            <Text className="stat-label">大额套利机会</Text>
+            <Text className="stat-label">高价差饰品</Text>
             <Text className="stat-value">{indexData.greatProfit}</Text>
             <Text className="stat-change blue">↗ 25%+ 价差</Text>
           </View>
           
           <View className="stat-card">
-            <Text className="stat-label">全网收益指数</Text>
-            <Text className="stat-value green">{(indexData.profitRate).toFixed(3)}</Text>
+            <Text className="stat-label">全网总价差</Text>
+            <Text className="stat-value green">{(indexData.profitRate*100).toFixed(3)}%</Text>
             <Text className="stat-change positive">↗ 高</Text>
           </View>
 
@@ -249,7 +222,7 @@ if (!indexData?.skins) {
 
         {/* Hot Arbitrage */}
         <View className="hot-section">
-          <Text className="section-title-text">高额可套利价差</Text>
+          <Text className="section-title-text">高价差饰品</Text>
           <View className="arbitrage-list">
             {indexData.topSkinSub.map((arbitrage:any) => (
               <View 
