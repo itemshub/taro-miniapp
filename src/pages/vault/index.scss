@@ -495,6 +495,11 @@
     overflow-y: auto;
     animation: slideUp 0.38s ease-out;
 
+    /* ⭐ 新增：底部安全区预留，避免被 tabBar 遮挡 */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 150rpx);
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 150rpx);
+
+
     .modal-header {
       display: flex;
       justify-content: space-between;
@@ -507,7 +512,7 @@
       }
 
       .modal-close {
-        font-size: 28px;
+        font-size:64px;
         color: $gray-400;
         padding: 0 $spacing-1;
 
@@ -748,4 +753,195 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+
+/* 分块 */
+.section-block {
+  margin-bottom: 48rpx;
+}
+
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.section-icon {
+  font-size: 40rpx;
+}
+
+.section-title,
+.section-title-text {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 16rpx;
+}
+/* 设置列表 */
+.setting-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.setting-item {
+  background-color: #1f2937;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.clickable {
+    &:active {
+      background-color: #374151;
+    }
+  }
+}
+
+.setting-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  flex: 1;
+}
+
+.setting-icon {
+  font-size: 40rpx;
+  color: #9ca3af;
+}
+
+.setting-icon-box {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.blue {
+    background-color: #2563eb;
+  }
+
+  &.green {
+    background-color: #16a34a;
+  }
+}
+
+.setting-icon-text {
+  font-size: 40rpx;
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.setting-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.setting-desc {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+.arrow {
+  font-size: 40rpx;
+  color: #9ca3af;
+}
+/* 按钮组 */
+.btn-bound,
+.btn-bind,
+.btn-manage {
+  padding: 8rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.btn-bound {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+.btn-bind {
+  background-color: #f97316;
+  color: #ffffff;
+}
+
+.btn-manage {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+.modal-intro {
+  text-align: center;
+}
+
+.modal-icon-box {
+  width: 128rpx;
+  height: 128rpx;
+  background-color: #2563eb;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32rpx;
+}
+
+.modal-icon {
+  font-size: 64rpx;
+}
+
+.modal-desc {
+  font-size: 28rpx;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+.modal-benefits {
+  background-color: #374151;
+  border-radius: 16rpx;
+  padding: 32rpx;
+}
+.benefits-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.benefit-dot {
+  width: 8rpx;
+  height: 8rpx;
+  background-color: #60a5fa;
+  border-radius: 50%;
+}
+
+.benefit-text {
+  font-size: 28rpx;
+  color: #d1d5db;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
 }

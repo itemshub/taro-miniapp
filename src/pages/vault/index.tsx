@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, Picker, Input } from '@tarojs/components';
+import { View, Text, Picker, Input, Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { mockVaultStakes, mockCases } from '../../data/mockData';
 import './index.scss';
@@ -11,7 +11,7 @@ const Vault = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'stake' | 'rewards'>('overview');
   const [showStakeModal, setShowStakeModal] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [showSteamBind, setShowSteamBind] = useState(false);
   const [selectedCase, setSelectedCase] = useState('');
   const [amount, setAmount] = useState(1);
   const [duration, setDuration] = useState(30);
@@ -47,38 +47,38 @@ const Vault = () => {
         <View className='stat-card stat-card-blue'>
           <View className='stat-header'>
             <Text className='stat-icon'>💰</Text>
-            <Text className='stat-label'>当前质押</Text>
+            <Text className='stat-label'>当前价值</Text>
           </View>
-          <Text className='stat-value'>¥{totalStaked.toFixed(2)}</Text>
-          <Text className='stat-sublabel'>可提现：¥{totalRewards.toFixed(2)}</Text>
+          <Text className='stat-value'>${totalStaked.toFixed(2)}</Text>
+          {/* <Text className='stat-sublabel'>可提现：${totalRewards.toFixed(2)}</Text> */}
         </View>
 
         <View className='stat-card stat-card-green'>
           <View className='stat-header'>
             <Text className='stat-icon'>📈</Text>
-            <Text className='stat-label'>累计收益</Text>
+            <Text className='stat-label'>累计价差</Text>
           </View>
-          <Text className='stat-value'>¥{totalRewards.toFixed(2)}</Text>
-          <Text className='stat-sublabel'>日收益：¥{dailyRewards.toFixed(2)}</Text>
+          <Text className='stat-value'>${totalRewards.toFixed(2)}</Text>
+          <Text className='stat-sublabel'>日价差：${dailyRewards.toFixed(2)}</Text>
         </View>
       </View>
 
       {/* Annual */}
       <View className='annual-rate slide-up-sm'>
         <View>
-          <Text className='annual-title'>年化收益率</Text>
-          <Text className='annual-subtitle'>基于当前质押数据</Text>
+          <Text className='annual-title'>已实现价差</Text>
+          <Text className='annual-subtitle'>基于当前托管数据</Text>
         </View>
 
         <View className='annual-value-wrapper'>
           <Text className='annual-value'>{annualRate.toFixed(1)}%</Text>
-          <Text className='annual-apy'>APY</Text>
+          {/* <Text className='annual-apy'>APY</Text> */}
         </View>
       </View>
 
       {/* Stakes */}
       <View className='stakes-section'>
-        <Text className='section-title'>我的质押</Text>
+        <Text className='section-title'>我的托管</Text>
 
         <View className='stakes-list'>
           {mockVaultStakes.map((s) => {
@@ -105,7 +105,7 @@ const Vault = () => {
                 {/* Progress */}
                 <View className='stake-progress'>
                   <View className='progress-header'>
-                    <Text>质押进度</Text>
+                    <Text>托管进度</Text>
                     <Text>{Math.min(progress, 100).toFixed(0)}%</Text>
                   </View>
 
@@ -124,7 +124,7 @@ const Vault = () => {
                   <View className='stake-daily'>
                     <Text className='stake-daily-icon'>⏱</Text>
                     <Text className='stake-daily-text'>
-                      日收益：¥{s.dailyReward.toFixed(2)}
+                      已实现价差：${s.dailyReward.toFixed(2)}
                     </Text>
                   </View>
 
@@ -132,7 +132,7 @@ const Vault = () => {
                     className={`stake-status ${s.status === 'active' ? 'status-active' : 'status-locked'}`}
                   >
                     <Text className='stake-status-text'>
-                      {s.status === 'active' ? '质押中' : '已解锁'}
+                      {s.status === 'active' ? '托管中' : '已解锁'}
                     </Text>
                   </View>
                 </View>
@@ -140,39 +140,107 @@ const Vault = () => {
             );
           })}
         </View>
+
+
+
+        <View className="section-block">
+          <Text className="section-title-text">账号绑定</Text>
+          <View className="setting-list">
+            <View className="setting-item">
+              <View className="setting-left">
+                <View className="setting-icon-box blue">
+                  <Text className="setting-icon-text">🛡️</Text>
+                </View>
+                <View className="setting-info">
+                  <Text className="setting-name">Steam账号</Text>
+                  <Text className="setting-desc">
+                    {true ? '已绑定' : '未绑定'}
+                  </Text>
+                </View>
+              </View>
+              <Button 
+                className={true ? 'btn-bound' : 'btn-bind'}
+                onClick={() => setShowSteamBind(true)}
+              >
+                {true ? '已绑定' : '绑定'}
+              </Button>
+            </View>
+          </View>
+        </View>
+
+
+        {/* <Text className='section-title'>📦开始托管</Text> */}
+        <View className='empty-state fade-in'>
+          <Text className='empty-icon'>📦</Text>
+          <Text className='empty-title'>开始托管</Text>
+          <Text className='empty-desc'>选择武器箱进行托管</Text>
+
+          <View className='empty-button scale-tap' onClick={() => setShowStakeModal(true)}>
+            <Text className='empty-button-text'>立即托管</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
 
   /** STAKE */
   const renderStake = () => (
-    <View className='empty-state fade-in'>
-      <Text className='empty-icon'>📦</Text>
-      <Text className='empty-title'>开始质押</Text>
-      <Text className='empty-desc'>选择箱子并开始获得收益</Text>
+    <View className='stakes-section'>
 
-      <View className='empty-button scale-tap' onClick={() => setShowStakeModal(true)}>
-        <Text className='empty-button-text'>立即质押</Text>
+      <View className="section-block">
+        <Text className="section-title-text">账号绑定</Text>
+        <View className="setting-list">
+          <View className="setting-item">
+            <View className="setting-left">
+              <View className="setting-icon-box blue">
+                <Text className="setting-icon-text">🛡️</Text>
+              </View>
+              <View className="setting-info">
+                <Text className="setting-name">Steam账号</Text>
+                <Text className="setting-desc">
+                  {false ? '已绑定' : '未绑定'}
+                </Text>
+              </View>
+            </View>
+            <Button 
+              className={false ? 'btn-bound' : 'btn-bind'}
+              onClick={() => setShowSteamBind(true)}
+            >
+              {false ? '已绑定' : '绑定'}
+            </Button>
+          </View>
+        </View>
+      </View>
+
+      <View className='empty-state fade-in'>
+        <Text className='empty-icon'>📦</Text>
+        <Text className='empty-title'>开始托管</Text>
+        <Text className='empty-desc'>选择武器箱进行托管</Text>
+
+        <View className='empty-button scale-tap' onClick={() => setShowStakeModal(true)}>
+          <Text className='empty-button-text'>立即托管</Text>
+        </View>
       </View>
     </View>
+
   );
 
   /** REWARDS */
   const renderRewards = () => (
     <View>
-      <Text className='section-title'>收益明细</Text>
+      <Text className='section-title'>托管明细</Text>
 
       <View className='rewards-list'>
         {mockDailyRewards.slice(0, 7).map((r, i) => (
           <View key={i} className='reward-item fade-in'>
             <View>
               <Text className='reward-date'>{r.date}</Text>
-              <Text className='reward-label'>日收益</Text>
+              <Text className='reward-label'>日实现利差</Text>
             </View>
 
             <View className='reward-values'>
-              <Text className='reward-amount'>+¥{r.reward.toFixed(2)}</Text>
-              <Text className='reward-cumulative'>累计：¥{r.cumulative.toFixed(2)}</Text>
+              <Text className='reward-amount'>+${r.reward.toFixed(2)}</Text>
+              <Text className='reward-cumulative'>累计：${r.cumulative.toFixed(2)}</Text>
             </View>
           </View>
         ))}
@@ -192,14 +260,14 @@ const Vault = () => {
         <View className='modal-overlay' onClick={() => setShowStakeModal(false)}>
           <View className='modal-content' onClick={(e) => e.stopPropagation()}>
             <View className='modal-header'>
-              <Text className='modal-title'>质押箱子</Text>
+              <Text className='modal-title'>托管武器箱</Text>
               <Text className='modal-close' onClick={() => setShowStakeModal(false)}>×</Text>
             </View>
 
             <View className='modal-body'>
               {/* 选择箱子 */}
               <View className='form-item'>
-                <Text className='form-label'>选择箱子</Text>
+                <Text className='form-label'>选择武器箱</Text>
                 <Picker
                   mode='selector'
                   range={mockCases}
@@ -210,7 +278,7 @@ const Vault = () => {
                     <Text>
                       {selectedCaseData
                         ? `${selectedCaseData.name} - ¥${selectedCaseData.price}`
-                        : '请选择箱子'}
+                        : '请选择武器箱'}
                     </Text>
                   </View>
                 </Picker>
@@ -229,7 +297,7 @@ const Vault = () => {
 
               {/* 周期 */}
               <View className='form-item'>
-                <Text className='form-label'>质押周期</Text>
+                <Text className='form-label'>单次最低利差</Text>
 
                 <View className='duration-buttons'>
                   {[7, 30, 90].map((d) => (
@@ -238,7 +306,7 @@ const Vault = () => {
                       className={`duration-btn ${duration === d ? 'duration-btn-active' : ''}`}
                       onClick={() => setDuration(d)}
                     >
-                      <Text className='duration-btn-text'>{d}天</Text>
+                      <Text className='duration-btn-text'>{d}%</Text>
                     </View>
                   ))}
                 </View>
@@ -247,7 +315,7 @@ const Vault = () => {
               {/* 信息卡片 */}
               {selectedCaseData && (
                 <View className='stake-info'>
-                  <Text className='stake-info-title'>质押信息</Text>
+                  <Text className='stake-info-title'>托管信息</Text>
 
                   <View className='stake-info-row'>
                     <Text className='stake-info-label'>价值：</Text>
@@ -257,19 +325,19 @@ const Vault = () => {
                   </View>
 
                   <View className='stake-info-row'>
-                    <Text className='stake-info-label'>周期：</Text>
-                    <Text className='stake-info-value'>{duration} 天</Text>
+                    <Text className='stake-info-label'>单次最低价差：</Text>
+                    <Text className='stake-info-value'>{duration} %</Text>
                   </View>
 
                   <View className='stake-info-row'>
-                    <Text className='stake-info-label'>预期收益：</Text>
+                    <Text className='stake-info-label'>预期价差：</Text>
                     <Text className='stake-info-value-green'>
-                      ¥{potentialReward.toFixed(2)}
+                      ${potentialReward.toFixed(2)}
                     </Text>
                   </View>
 
                   <View className='stake-info-row'>
-                    <Text className='stake-info-label'>预估年化：</Text>
+                    <Text className='stake-info-label'>预估总价差：</Text>
                     <Text className='stake-info-value-green'>
                       {(potentialReward / (selectedCaseData.price * amount) * (365 / duration) * 100).toFixed(1)}%
                     </Text>
@@ -304,33 +372,33 @@ const Vault = () => {
             <View className='confirm-icon'>
               <Text className='confirm-icon-text'>🔒</Text>
             </View>
-            <Text className='confirm-title'>质押确认</Text>
-            <Text className='confirm-subtitle'>确认后资产将进入锁定周期</Text>
+            <Text className='confirm-title'>托管确认</Text>
+            <Text className='confirm-subtitle'>确认后武器箱将进入锁定周期</Text>
           </View>
 
           {selectedCaseData && (
             <View className='confirm-info'>
               <View className='confirm-info-row'>
-                <Text className='confirm-info-label'>质押资产：</Text>
+                <Text className='confirm-info-label'>托管武器箱：</Text>
                 <Text className='confirm-info-value'>
                   {selectedCaseData.name} × {amount}
                 </Text>
               </View>
 
               <View className='confirm-info-row'>
-                <Text className='confirm-info-label'>总价值：</Text>
+                <Text className='confirm-info-label'>总市价：</Text>
                 <Text className='confirm-info-value'>
                   ¥{(selectedCaseData.price * amount).toFixed(2)}
                 </Text>
               </View>
 
               <View className='confirm-info-row'>
-                <Text className='confirm-info-label'>周期：</Text>
+                <Text className='confirm-info-label'>最低利差：</Text>
                 <Text className='confirm-info-value'>{duration} 天</Text>
               </View>
 
               <View className='confirm-info-row'>
-                <Text className='confirm-info-label'>预期收益：</Text>
+                <Text className='confirm-info-label'>预期单周期收益：</Text>
                 <Text className='confirm-info-value-green'>
                   ¥{potentialReward.toFixed(2)}
                 </Text>
@@ -355,7 +423,7 @@ const Vault = () => {
             <View
               className='confirm-action-submit'
               onClick={() => {
-                Taro.showToast({ title: '质押成功', icon: 'success' });
+                Taro.showToast({ title: '托管成功', icon: 'success' });
                 setShowConfirm(false);
                 setShowStakeModal(false);
                 setAmount(1);
@@ -380,9 +448,9 @@ const Vault = () => {
       <View className='vault-header'>
         <View className='vault-header-content'>
           <Text className='vault-header-icon'>🔐</Text>
-          <Text className='vault-header-title'>质押金库</Text>
+          <Text className='vault-header-title'>武器箱托管</Text>
         </View>
-        <Text className='vault-header-desc'>箱子质押 • 持续收益</Text>
+        <Text className='vault-header-desc'>托管武器箱 • 自动吃价差</Text>
       </View>
 
       {/* Tabs */}
@@ -401,7 +469,7 @@ const Vault = () => {
             onClick={() => setActiveTab('stake')}
           >
             <Text className='tab-icon'>➕</Text>
-            <Text className='tab-text'>质押</Text>
+            <Text className='tab-text'>托管</Text>
           </View>
 
           <View
@@ -409,7 +477,7 @@ const Vault = () => {
             onClick={() => setActiveTab('rewards')}
           >
             <Text className='tab-icon'>💹</Text>
-            <Text className='tab-text'>收益</Text>
+            <Text className='tab-text'>明细</Text>
           </View>
         </View>
       </View>
@@ -423,6 +491,62 @@ const Vault = () => {
 
       {/* Modal */}
       {renderStakeModal()}
+
+
+
+      {/* Steam Bind Modal */}
+      {showSteamBind && (
+        <View className="modal-overlay" onClick={() => setShowSteamBind(false)}>
+          <View className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <View className="modal-header">
+              <Text className="modal-title">绑定Steam账号</Text>
+              <Text 
+                className="modal-close"
+                onClick={() => setShowSteamBind(false)}
+              >
+                ×
+              </Text>
+            </View>
+            
+            <View className="modal-body">
+              <View className="modal-intro">
+                <View className="modal-icon-box">
+                  <Text className="modal-icon">🛡️</Text>
+                </View>
+                <Text className="modal-desc">
+                  绑定Steam账号实现武器箱托管
+                </Text>
+              </View>
+              
+              <View className="modal-benefits">
+                <Text className="benefits-title">为什么要绑定Steam</Text>
+                <View className="benefit-item">
+                  <View className="benefit-dot" />
+                  <Text className="benefit-text">托管武器箱自动价差</Text>
+                </View>
+                <View className="benefit-item">
+                  <View className="benefit-dot" />
+                  <Text className="benefit-text">一键导入Steam库存</Text>
+                </View>
+                <View className="benefit-item">
+                  <View className="benefit-dot" />
+                  <Text className="benefit-text">交易安全保障</Text>
+                </View>
+              </View>
+              
+              <View className="modal-actions">
+                <Button className="btn-primary" onClick={renderOverview}>
+                  <Text>🔗 通过Steam授权登录</Text>
+                </Button>
+                
+                <Button className="btn-secondary" onClick={renderOverview}>
+                  <Text>手动输入SteamID</Text>
+                </Button>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
