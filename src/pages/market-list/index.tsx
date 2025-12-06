@@ -119,6 +119,9 @@ const Market = () => {
       url: `/pages/skin-detail/index?id=${id}`,
     });
   };
+  const handleMarketClick = (id: number) => {
+    Taro.navigateTo({ url: `/pages/market-detail/index?id=${id}` });
+  };
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -291,7 +294,7 @@ const Market = () => {
             {markets.map((market:any) => (
               <View
                 key={market.name}
-                onClick={() => handleSkinClick(market.name)}
+                onClick={() => handleMarketClick(market.name)}
                 className="list-item"
               >
                 <Image
