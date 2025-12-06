@@ -47,13 +47,13 @@ export default defineAppConfig({
         iconPath: 'assets/icons/graduation-cap.png',
         selectedIconPath: 'assets/icons/graduation-cap-white.png',
         text: '比价'
+      },
+      {
+        pagePath: 'pages/vault/index',
+        iconPath: 'assets/icons/landmark.png',
+        selectedIconPath: 'assets/icons/landmark-white.png',
+        text: '托管'
       }
-      // {
-      //   pagePath: 'pages/vault/index',
-      //   iconPath: 'assets/icons/landmark.png',
-      //   selectedIconPath: 'assets/icons/landmark-white.png',
-      //   text: '质押'
-      // },
       // {
       //   pagePath: 'pages/profile/index',
       //   iconPath: 'assets/icons/shield-user.png',
