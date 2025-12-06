@@ -431,9 +431,9 @@ export default function ArbitrageDetail() {
               </View>
               
               <View className='calc-section'>
-                <Text className='calc-title'>收入计算</Text>
+                <Text className='calc-title'>卖出计算</Text>
                 <View className='calc-row'>
-                  <Text className='calc-label'>卖出收入：</Text>
+                  <Text className='calc-label'>卖出价格：</Text>
                   <Text className='calc-value'>${sellTotal.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row'>
@@ -441,7 +441,7 @@ export default function ArbitrageDetail() {
                   <Text className='calc-value'>${sellFee.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row total'>
-                  <Text className='calc-label'>净收入：</Text>
+                  <Text className='calc-label'>净收差值：</Text>
                   <Text className='calc-value'>${totalRevenue.toFixed(2)}</Text>
                 </View>
               </View>
