@@ -237,7 +237,7 @@ export default function MarketDetail() {
           </View>
           <View className='meta-item'>
             <Text className='meta-label'>货币</Text>
-            <Text className='meta-value'>USD</Text>
+            <Text className='meta-value'>CNY</Text>
           </View>
         </View>
         
@@ -265,7 +265,7 @@ export default function MarketDetail() {
           </View>
           <View className='stat-card'>
             <Text className='stat-label'>市场价值</Text>
-            <Text className='stat-value'>{market.value}$</Text>
+            <Text className='stat-value'>{market.value*7}￥</Text>
             <Text className='stat-trend info'>平均折扣 : {market.avg_discount}%</Text>
           </View>
         </View>
@@ -290,7 +290,7 @@ export default function MarketDetail() {
                 <Text className='skin-name'>{skin.name}</Text>
                 <Text className='skin-type'>{skin.skin}</Text>
                 <View className='skin-price-row'>
-                  <Text className='skin-price'>${(skin.price).toFixed(2)}</Text>
+                  <Text className='skin-price'>￥{(skin.price*7).toFixed(2)}</Text>
                   <Text className={`skin-change positive`}>
                    ± {(skin.averageSub).toFixed(2)}%
                   </Text>
@@ -339,9 +339,9 @@ export default function MarketDetail() {
 
       {/* Actions */}
       <View className='actions'>
-        <Button className='action-button primary' onClick={handleVisitWebsite}>
+        {/* <Button className='action-button primary' onClick={handleVisitWebsite}>
           访问官网
-        </Button>
+        </Button> */}
         {/* <Button className='action-button secondary' onClick={handleViewApiDoc}>
           API文档
         </Button> */}

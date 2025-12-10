@@ -206,7 +206,7 @@ if (!indexData?.skins) {
                 />
                 <View className="case-info">
                   <Text className="case-name">{caseItem.name}</Text>
-                  <Text className="case-price">${(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).price : 0  ).toFixed(2)}</Text>
+                  <Text className="case-price">￥{(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).price*7 : 0  ).toFixed(2)}</Text>
                   <Text className={`case-change positive`}>
                     ± {(getSkinsById(indexData.skins,caseItem.id) ? getSkinsById(indexData.skins,caseItem.id).averageSub*100 : 0  ).toFixed(2)}%
                   </Text>
@@ -241,7 +241,7 @@ if (!indexData?.skins) {
                     {arbitrage.from.name} → {arbitrage.to.name}
                   </Text>
                   <Text className="arbitrage-amount">
-                    ${(arbitrage.skin.averageSub * arbitrage.skin.price).toFixed(2)}
+                    ￥{(arbitrage.skin.averageSub * arbitrage.skin.price*7).toFixed(2)}
                   </Text>
                 </View>
               </View>

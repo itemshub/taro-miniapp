@@ -208,7 +208,7 @@ export default function SkinDetail() {
         <View className='price-info'>
           <View className='price-item'>
             <Text className='price-label'>当前价格</Text>
-            <Text className='price-value'>${targetSkin.data.price.toFixed(2)}</Text>
+            <Text className='price-value'>￥{(targetSkin.data.price*7).toFixed(2)}</Text>
           </View>
           <View className='price-item'>
             <Text className='price-label'>有效价差</Text>
@@ -231,18 +231,18 @@ export default function SkinDetail() {
                 <Text className='market-volume'>挂单量: {market.active_offers}</Text>
               </View>
               <View className='market-price-info'>
-                <Text className='market-price'>${market.price.toFixed(2)}</Text>
+                <Text className='market-price'>￥{(market.price*7).toFixed(2)}</Text>
                 <Text className={`market-change ${getChangeColor(market.price-targetSkin.data.price)}`}>
                   {market.change >= targetSkin.data.price ? '+' : ''}{((market.price-targetSkin.data.price)*100 / market.price).toFixed(1)}%
                 </Text>
               </View>
-              <Button 
+              {/* <Button 
                 className='link-button' 
                 size='mini'
                 onClick={() => handleExternalLink(market.market_url)}
               >
                 跳转
-              </Button>
+              </Button> */}
             </View>
           ))}
         </View>
@@ -258,11 +258,11 @@ export default function SkinDetail() {
           <View className='arbitrage-platforms'>
             <View className='arbitrage-item'>
               <Text className='arbitrage-label'>最优买入</Text>
-              <Text className='arbitrage-buy'>{arbi.from.name} - ${(arbi.from.price).toFixed(2)}</Text>
+              <Text className='arbitrage-buy'>{arbi.from.name} - ￥{(arbi.from.price*7).toFixed(2)}</Text>
             </View>
             <View className='arbitrage-item'>
               <Text className='arbitrage-label'>最优卖出</Text>
-              <Text className='arbitrage-sell'>{arbi.to.name} - ${arbi.to.price.toFixed(2)}</Text>
+              <Text className='arbitrage-sell'>{arbi.to.name} - ￥{(arbi.to.price*7).toFixed(2)}</Text>
             </View>
           </View>
           
@@ -270,7 +270,7 @@ export default function SkinDetail() {
             <Text className='profit-label'>价差</Text>
             <View className='profit-values'>
               <Text className='profit-rate'>+{(arbi.averageSub*100).toFixed(2)}%</Text>
-              <Text className='profit-amount'>${(arbi.sub).toFixed(2)}</Text>
+              <Text className='profit-amount'>￥{(arbi.sub*7).toFixed(2)}</Text>
             </View>
           </View>
           

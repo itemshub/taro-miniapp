@@ -310,7 +310,7 @@ const Market = () => {
                   <View className="item-skin">{skin.id}</View>
                   <View className="item-footer">
                     <View className="item-price">
-                      ${Number((getSkinsById(indexData.skins,skin.id) ? getSkinsById(indexData.skins,skin.id).price : 0  )).toFixed(2)}
+                      ￥{Number((getSkinsById(indexData.skins,skin.id) ? getSkinsById(indexData.skins,skin.id).price*7 : 0  )).toFixed(2)}
                     </View>
                     <View
                       className={`item-change ${
