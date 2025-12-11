@@ -204,7 +204,7 @@ export default function Arbitrage() {
                       <Text className="market-label">买入市场</Text>
                       <Text className="market-name">{arbitrage.from.name}</Text>
                       <Text className="price-buy">
-                        ${arbitrage.from.price.toFixed(2)}
+                        ￥{(arbitrage.from.price*7).toFixed(2)}
                       </Text>
                     </View>
                     <View className="arrow-wrapper">
@@ -214,7 +214,7 @@ export default function Arbitrage() {
                       <Text className="market-label">卖出市场</Text>
                       <Text className="market-name">{arbitrage.to.name}</Text>
                       <Text className="price-sell">
-                        ${arbitrage.to.price.toFixed(2)}
+                        ￥{(arbitrage.to.price*7).toFixed(2)}
                       </Text>
                     </View>
                   </View>
@@ -227,7 +227,7 @@ export default function Arbitrage() {
                           +{((arbitrage.to.price - arbitrage.from.price)*100 / arbitrage.from.price).toFixed(2)}%
                         </Text>
                         <Text className="profit-amount">
-                          ${(arbitrage.to.price - arbitrage.from.price).toFixed(2)}
+                          ￥{((arbitrage.to.price - arbitrage.from.price)*7).toFixed(2)}
                         </Text>
                       </View>
                     </View>

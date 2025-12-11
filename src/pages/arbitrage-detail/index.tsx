@@ -204,8 +204,8 @@ export default function ArbitrageDetail() {
     );
   }
   
-  const buyTotal = arbi.from.price * customQuantity
-  const sellTotal = arbi.to.price * customQuantity
+  const buyTotal = arbi.from.price * customQuantity *7
+  const sellTotal = arbi.to.price * customQuantity*7
   const buyFeeRate = Number(arbi.from.info.seller_fee.split("%")[0])/100
   const buyFee = buyTotal * buyFeeRate
   const sellFeeRate = Number(arbi.to.info.seller_fee.split("%")[0])/100
@@ -243,7 +243,7 @@ export default function ArbitrageDetail() {
             <Text className='skin-type'>{targetSkin.skin}</Text>
             <View className='skin-meta'>
               <View className={`risk-badge low`}>
-                <Text className='risk-text'>{(targetSkin.data.price).toFixed(3)}$</Text>
+                <Text className='risk-text'>{(targetSkin.data.price*7).toFixed(3)}￥</Text>
               </View>
               <Text className='volume-text'>交易量: {(targetSkin.data.offers).toFixed(0)}</Text>
             </View>
@@ -264,7 +264,7 @@ export default function ArbitrageDetail() {
               <View className='market-card'>
                 <Text className='platform-name'>{arbi.from.name}</Text>
                 <Text className='platform-fee'>手续费 {arbi.from.info.seller_fee}</Text>
-                <Text className='platform-price'>${arbi.from.price.toFixed(2)}</Text>
+                <Text className='platform-price'>￥{(arbi.from.price*7).toFixed(2)}</Text>
               </View>
             </View>
             
@@ -282,7 +282,7 @@ export default function ArbitrageDetail() {
               <View className='market-card'>
                 <Text className='platform-name'>{arbi.to.name}</Text>
                 <Text className='platform-fee'>手续费 {arbi.to.info.seller_fee}</Text>
-                <Text className='platform-price'>${arbi.to.price.toFixed(2)}</Text>
+                <Text className='platform-price'>￥{(arbi.to.price*7).toFixed(2)}</Text>
               </View>
             </View>
           </View>
@@ -291,7 +291,7 @@ export default function ArbitrageDetail() {
             <View className='profit-item'>
               <Text className='profit-label'>价格差</Text>
               <Text className='profit-value orange'>
-                ${(arbi.to.price - arbi.from.price).toFixed(2)}
+                ￥{((arbi.to.price - arbi.from.price)*7).toFixed(2)}
               </Text>
             </View>
             <View className='profit-item'>
@@ -300,12 +300,12 @@ export default function ArbitrageDetail() {
                 +{((arbi.to.price - arbi.from.price)*100/arbi.from.price).toFixed(2)}%
               </Text>
             </View>
-            <View className='profit-item'>
+            {/* <View className='profit-item'>
               <Text className='profit-label'>预估差额</Text>
               <Text className='profit-value blue'>
-                ${(arbi.to.price - arbi.from.price).toFixed(2)}
+                ￥{(arbi.to.price - arbi.from.price).toFixed(2)}
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
 
@@ -418,15 +418,15 @@ export default function ArbitrageDetail() {
                 <Text className='calc-title'>成本计算</Text>
                 <View className='calc-row'>
                   <Text className='calc-label'>买入成本：</Text>
-                  <Text className='calc-value'>${buyTotal.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{buyTotal.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row'>
                   <Text className='calc-label'>买入手续费 ({buyFeeRate*100}%)：</Text>
-                  <Text className='calc-value'>${buyFee.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{buyFee.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row total'>
                   <Text className='calc-label'>总成本：</Text>
-                  <Text className='calc-value'>${totalCost.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{totalCost.toFixed(2)}</Text>
                 </View>
               </View>
               
@@ -434,15 +434,15 @@ export default function ArbitrageDetail() {
                 <Text className='calc-title'>卖出计算</Text>
                 <View className='calc-row'>
                   <Text className='calc-label'>卖出价格：</Text>
-                  <Text className='calc-value'>${sellTotal.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{sellTotal.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row'>
                   <Text className='calc-label'>卖出手续费 ({sellFeeRate * 100}%)：</Text>
-                  <Text className='calc-value'>${sellFee.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{sellFee.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row total'>
                   <Text className='calc-label'>净收差值：</Text>
-                  <Text className='calc-value'>${totalRevenue.toFixed(2)}</Text>
+                  <Text className='calc-value'>￥{totalRevenue.toFixed(2)}</Text>
                 </View>
               </View>
               
@@ -450,7 +450,7 @@ export default function ArbitrageDetail() {
                 <Text className='calc-title profit-title'>净差值</Text>
                 <View className='calc-row'>
                   <Text className='calc-label'>净差值金额：</Text>
-                  <Text className='calc-value profit-value'>${netProfit.toFixed(2)}</Text>
+                  <Text className='calc-value profit-value'>￥{netProfit.toFixed(2)}</Text>
                 </View>
                 <View className='calc-row'>
                   <Text className='calc-label'>净价差比率：</Text>
